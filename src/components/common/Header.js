@@ -7,7 +7,13 @@ const Header = () => {
     if (window.innerWidth >= 1024) {
       setMenuShow(true);
     }
-  }, [window.innerWidth]);
+  });
+
+  window.onresize = () => {
+    if (window.innerWidth >= 1024) {
+      setMenuShow(true);
+    }
+  };
 
   return (
     <>
