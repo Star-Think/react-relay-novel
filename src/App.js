@@ -30,7 +30,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<RelayMain />} />
-          <Route path="/relay" element={<RelayRoute />} />
+          <Route exact path="/relay/*" element={<RelayRoute />} />
         </Routes>
       </BrowserRouter>
     </>

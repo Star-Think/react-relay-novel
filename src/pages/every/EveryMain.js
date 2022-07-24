@@ -6,7 +6,7 @@ import MemoTitle from "../../components/common/MemoTitle";
 import BasicTemplate from "../../components/templates/BasicTemplate";
 import { memoData } from "../../utils/MemoData";
 
-const RelayMain = () => {
+const EveryMain = () => {
   const [memoDataList, setMemoDataList] = useState([]);
   const location = useLocation();
   const page = location.state !== null ? location.state.page : 1;
@@ -31,7 +31,7 @@ const RelayMain = () => {
         Content={() => {
           return (
             <>
-              <MemoTitle title={"릴레이 소설"} />
+              <MemoTitle title={"모두의 메모"} />
               <MemoList memoDataList={memoDataList} />
               <MemoPage memoDataCount={memoData.length} />
             </>
@@ -42,4 +42,4 @@ const RelayMain = () => {
   );
 };
 
-export default RelayMain;
+export default EveryMain;

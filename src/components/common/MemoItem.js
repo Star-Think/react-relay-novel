@@ -1,11 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { timeChange } from "../../utils/CommonFun";
 
 const MemoItem = ({ memo }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="lg:w-1/4 md:w-1/2 w-full p-5">
-        <a href="/post/5144/">
+        <div
+          onClick={() => navigate(`/relay/detail/${memo.idx}`)}
+          style={{ cursor: "pointer" }}
+        >
           <div className="hover:shadow-2xl card shadow-lg w-full h-full break-all">
             <div className="card-body h-72 bg-white">
               <div className="flex justify-between">
@@ -32,7 +37,7 @@ const MemoItem = ({ memo }) => {
               <p>{memo.content}</p>
             </div>
           </div>
-        </a>
+        </div>
       </div>
     </>
   );

@@ -10,7 +10,6 @@ const MemoList = ({ memoDataList }) => {
           return <MemoItem key={mData.idx} memo={mData} />;
         })}
       </div>
-      <MemoPage />
     </>
   );
 };
