@@ -13,7 +13,7 @@ const HomeTopicContent = () => {
 
   return (
     <>
-      <div className="w-screen h-72 flex justify-center items-center mb-10 h-44 bg">
+      <div className="w-screen h-72 flex justify-center items-center mb-10 bg">
         <video
           autoPlay
           muted
@@ -23,7 +23,7 @@ const HomeTopicContent = () => {
           <source src={"/video/backVideo.mp4"} type="video/mp4" />
         </video>
         <div className={`px-10 text ${endCheck ? "fade-in" : "display-none"} `}>
-          <h1 className="xl:text-4xl lg:text-4xl md:text-3xl sm:text-2xl xs:text-2xl text-lg text-accent text-center">
+          <h1 className="xl:text-4xl lg:text-4xl md:text-3xl sm:text-2xl xs:text-2xl text-lg text-accent text-center bg-title">
             세상에서 가장 재미있는 일기쓰기
           </h1>
           <div className="text-center mt-10">

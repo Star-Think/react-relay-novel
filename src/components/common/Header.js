@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="navbar mb-0 shadow-lg bg-neutral text-neutral-content">
+      <div className="navbar mb-0 shadow-lg bg-neutral text-neutral-content menu-fixed">
         <div className="flex-none px-2 mx-2">
           <a href="/" className="text-2xl font-bold">
             오늘의 메모
@@ -44,7 +44,7 @@ const Header = () => {
           </div>
           <div
             id="burgerButton"
-            className="flex-none xl:hidden lg:hidden"
+            className="flex-none xl:hidden lg:hidden "
             onClick={() => setMenuShow(!menuShow)}
           >
             <button className="btn btn-square btn-ghost">
@@ -54,12 +54,7 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 className="inline-block w-5 h-5 stroke-current"
               >
-                <path
-                  // stroke-linecap="round"
-                  // stroke-linejoin="round"
-                  // stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
             </button>
           </div>
@@ -68,7 +63,9 @@ const Header = () => {
 
       <div
         id="burgerMenu"
-        className={`flex justify-end z-10 ${menuShow ? "hidden" : ""} `}
+        className={`flex justify-end z-10 ${
+          menuShow ? "hidden" : ""
+        } sub-menu-fixed`}
       >
         <ul className="menu bg-neutral text-neutral-content w-screen">
           <a href="/topic/" className="btn btn-ghost">
