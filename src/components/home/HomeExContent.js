@@ -10,7 +10,7 @@ const HomeExContent = () => {
 
   return (
     <>
-      <div className="text-center mt-10">
+      <div className="text-center mt-22">
         <p className="text-2xl text-warning">이런 일기를 썼답니다</p>
       </div>
 

@@ -7,12 +7,14 @@ const HomeUsesContent = () => {
 
   return (
     <>
-      <div className="text-center mb-10 mt-10">
-        <p className="text-2xl text-warning">오늘의 일기, 이렇게 활용하세요</p>
+      <div className="text-center mb-22 mt-22">
+        <p className="text-2xl text-warning" data-aos="fade-right">
+          오늘의 일기, 이렇게 활용하세요
+        </p>
       </div>
 
       <div className="flex flex-wrap justify-center w-screen bg-primary h-auto py-10">
-        <div className="xl:w-1/5 md:w-1/2 w-full p-5">
+        <div className="xl:w-1/5 md:w-1/2 w-full p-5" data-aos="fade-right">
           <div className="card shadow-lg w-full h-full break-all">
             <div className="card-body bg-white">
               <h2 className="card-title text-center text-6xl text-success">
@@ -30,7 +32,7 @@ const HomeUsesContent = () => {
           </div>
         </div>
 
-        <div className="lg:w-1/5 md:w-1/2 w-full p-5">
+        <div className="lg:w-1/5 md:w-1/2 w-full p-5" data-aos="fade-up">
           <div className="card shadow-lg w-full h-full break-all">
             <div className="card-body bg-white">
               <h2 className="card-title text-center text-6xl text-error">
@@ -47,7 +49,7 @@ const HomeUsesContent = () => {
           </div>
         </div>
 
-        <div className="lg:w-1/5 md:w-1/3 w-full p-5">
+        <div className="lg:w-1/5 md:w-1/3 w-full p-5" data-aos="fade-left">
           <div className="card shadow-lg w-full h-full break-all">
             <div className="card-body bg-white">
               <h2 className="card-title text-center text-6xl text-info">

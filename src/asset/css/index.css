@@ -122,3 +122,9 @@ video {
   z-index: 100;
   top: 80px;
 }
+.mb-22 {
+  margin-bottom: 22rem;
+}
+.mt-22 {
+  margin-top: 22rem;
+}
