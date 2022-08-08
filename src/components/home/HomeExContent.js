@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import AOS from "aos";
+
 const HomeExContent = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    AOS.init();
-  });
-
   return (
     <>
-      <div className="text-center mt-22">
-        <p className="text-2xl text-warning">이런 일기를 썼답니다</p>
+      <div className="text-center mt-22 mb-22">
+        <p className="text-2xl text-warning" data-aos="fade-right">
+          이런 일기를 썼답니다
+        </p>
       </div>
 
       <div className="w-screen h-auto">

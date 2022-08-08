@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-import AOS from "aos";
+
 const HomeTopicContent = () => {
   const [endCheck, setEndCheck] = useState(false);
-
-  useEffect(() => {
-    AOS.init();
-  });
 
   const videoEndEvent = () => {
     setEndCheck(true);
