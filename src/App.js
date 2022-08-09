@@ -5,6 +5,9 @@ import "./asset/css/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RelayMain from "./pages/relay/RelayMain";
 import RelayRoute from "./routes/RelayRoute";
+import MyDiary from "./pages/mydiary/MyDiary";
+import MyPage from "./pages/mypage/MyPage";
+import MyButton from "./components/common/MyButton";
 
 function App() {
   // useEffect(() => {
@@ -31,6 +34,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={<RelayMain />} />
           <Route exact path="/relay/*" element={<RelayRoute />} />
+          <Route exact path="/classroom" element={<MyDiary />} />
+          <Route exact path="/mypage" element={<MyPage />} />
         </Routes>
       </BrowserRouter>
     </>
