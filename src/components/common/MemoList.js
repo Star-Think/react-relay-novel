@@ -1,9 +1,5 @@
 import React from 'react';
 import MemoItem from './MemoItem';
-import MemoPage from './MemoPage';
-import React from 'react';
-import MemoItem from './MemoItem';
-import MemoPage from './MemoPage';
 import { useEffect, useState } from 'react';
 import { timeChange } from '../../utils/CommonFun';
 
