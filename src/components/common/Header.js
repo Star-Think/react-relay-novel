@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [menuShow, setMenuShow] = useState(true);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (window.innerWidth >= 1024) {
       setMenuShow(true);
@@ -13,6 +14,11 @@ const Header = () => {
     if (window.innerWidth >= 1024) {
       setMenuShow(true);
     }
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
   };
 
   return (
@@ -32,15 +38,27 @@ const Header = () => {
             <a href="/everydiary/" className="btn btn-ghost btn-sm rounded-btn">
               모두의 메모
             </a>
-            <a href="/mydiary/" className="btn btn-ghost btn-sm rounded-btn">
+            <div
+              onClick={() => navigate("/relay")}
+              className="btn btn-ghost btn-sm rounded-btn"
+            >
               릴레이 소설
-            </a>
+            </div>
             <a href="/signup/" className="btn btn-ghost btn-sm rounded-btn">
               회원가입
             </a>
-            <a href="/login/" className="btn btn-ghost btn-sm rounded-btn">
-              로그인
-            </a>
+            {localStorage.getItem("access_token") === null ? (
+              <a href="/login/" className="btn btn-ghost btn-sm rounded-btn">
+                로그인
+              </a>
+            ) : (
+              <div
+                onClick={() => logout()}
+                className="btn btn-ghost btn-sm rounded-btn"
+              >
+                로그아웃
+              </div>
+            )}
           </div>
           <div
             id="burgerButton"

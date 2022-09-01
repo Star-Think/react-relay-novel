@@ -1,8 +1,11 @@
 import Header from "../../components/common/Header";
 import Footer from "../../components/common/Footer";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
   const postLogin = async (id, pwd) => {
     await axios({
       method: "post",
@@ -13,8 +16,9 @@ function Login() {
       },
     })
       .then((res) => {
-        localStorage.setItem("access_token", res.data.access_token);
-        alert("로그인에 성공하였습니다.");
+        console.log(res);
+        localStorage.setItem("access_token", res.data.data);
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import MemoList from "../../components/common/MemoList";
 import MemoPage from "../../components/common/MemoPage";
 import MemoTitle from "../../components/common/MemoTitle";
@@ -10,8 +10,11 @@ const RelayMain = () => {
   const [memoDataList, setMemoDataList] = useState([]);
   const location = useLocation();
   const page = location.state !== null ? location.state.page : 1;
-
+  const navigate = useNavigate();
   useEffect(() => {
+    if (localStorage.getItem("access_token") === null) {
+      navigate("/login");
+    }
     memoGet();
     window.scrollTo(0, 0);
   }, [page]);
