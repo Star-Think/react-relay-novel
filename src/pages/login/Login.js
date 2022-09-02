@@ -2,17 +2,24 @@ import Header from "../../components/common/Header";
 import Footer from "../../components/common/Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import InputBox from "../../components/common/InputBox";
 
 function Login() {
   const navigate = useNavigate();
 
-  const postLogin = async (id, pwd) => {
+  const idRef = useRef();
+  const pwdRef = useRef();
+  const [idText, setIdText] = useState();
+  const [pwdText, setPwdText] = useState();
+
+  const postLogin = async () => {
     await axios({
       method: "post",
       url: "/star/api/login",
       data: {
-        user_id: id,
-        password: pwd,
+        user_id: idText,
+        password: pwdText,
       },
     })
       .then((res) => {
@@ -24,54 +31,43 @@ function Login() {
         console.log(err);
         alert("아이디 또는 비밀번호를 확인하세요");
       });
-
-    //console.log(result);
   };
 
   return (
     <>
       <Header />
-      <table className="flex justify-center flex-wrap">
-        <thead className="w-full flex justify-center  mb-10">
-          <tr className="mt-48">
-            <th colSpan="2">Login</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="w-full flex justify-center flex-wrap">
-            <td className="w-full flex justify-center">
-              <label htmlFor="id" className="text-center w-1/6">
-                ID
-              </label>
-              <input
-                type="text"
-                placeholder="아이디를 입력하세요"
-                className="mb-5 ml-10 p-1.5"
-              />
-            </td>
-            <td className="w-full flex justify-center">
-              <label htmlFor="pwd" className="text-right w-1/6">
-                PASSWORD
-              </label>
-              <input
-                type="password"
-                placeholder="비밀번호를 입력하세요"
-                className="mb-5 ml-10 p-1.5"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div className="w-full flex justify-center mt-10">
-        <button
-          className="mr-10 hover:bg-yellow-300 px-2 py-1.5 rounded-md"
-          onClick={() => postLogin("qaws", "1234")}
-        >
-          로그인
-        </button>
-        <button className="hover:bg-yellow-300 px-2 py-1.5 rounded-md">
-          회원가입하기
-        </button>
+      <div className="flex justify-center mt-40">
+        <div className="xl:w-2/12 lg:w-4/12 md:w-6/12 sm:w-8/12 w-10/12">
+          <InputBox
+            autofocus={true}
+            placeholder="아이디"
+            value={idText}
+            ref={idRef}
+            onChange={(e) => setIdText(e.target.value)}
+          />
+          <InputBox
+            type={"password"}
+            placeholder="비밀번호"
+            value={pwdText}
+            ref={pwdRef}
+            onChange={(e) => setPwdText(e.target.value)}
+          />
+          <div className="flex justify-end mt-5">
+            <button
+              className="btn btn-primary btn-block"
+              onClick={() => postLogin()}
+            >
+              로그인
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-center mt-10 link link-hover text-warning">
+        <div>회원가입</div>
+      </div>
+      <div className="flex justify-center mt-10 link text-sm text-gray-500">
+        <div className="mx-5">아이디 찾기</div>
+        <div className="mx-5">비밀번호 찾기</div>
       </div>
       <Footer />
     </>

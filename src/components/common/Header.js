@@ -26,17 +26,17 @@ const Header = () => {
       <div className="navbar mb-0 shadow-lg bg-neutral text-neutral-content menu-fixed">
         <div className="flex-none px-2 mx-2">
           <a href="/" className="text-2xl font-bold">
-            오늘의 메모
+            오늘의 일기장
           </a>
         </div>
 
         <div className="flex-1 px-2 mx-2 navbar-end">
           <div className="items-stretch hidden lg:flex">
             <a href="/classroom/" className="btn btn-ghost btn-sm rounded-btn">
-              내 메모
+              내 일기장
             </a>
             <a href="/everydiary/" className="btn btn-ghost btn-sm rounded-btn">
-              모두의 메모
+              모두의 일기장
             </a>
             <div
               onClick={() => navigate("/relay")}
