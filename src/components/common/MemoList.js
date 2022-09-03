@@ -9,7 +9,7 @@ const MemoList = ({ memoDataList, isMyMemo }) => {
 
   useEffect(() => {
     memoDataList.forEach((memoData) => {
-      if (dateList[dateList.length - 1] != memoData.date) {
+      if (dateList[dateList.length - 1] !== memoData.date) {
         dateList.push(memoData.date);
       }
     });
