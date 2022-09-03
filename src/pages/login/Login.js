@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import InputBox from "../../components/common/InputBox";
+import { encrypt } from "../../utils/CryptoJsMake";
 
 function Login() {
   const navigate = useNavigate();
@@ -30,10 +31,12 @@ function Login() {
         const data = res.data.data;
         localStorage.setItem(
           "user_info",
-          JSON.stringify({
-            user_id: data.user_id,
-            nickname: data.nickname,
-          })
+          encrypt(
+            JSON.stringify({
+              user_id: data.user_id,
+              nickname: data.nickname,
+            })
+          )
         );
         navigate("/");
       })

@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { decrypt } from "../../utils/CryptoJsMake";
 
 const Header = () => {
   const [menuShow, setMenuShow] = useState(true);
   const navigate = useNavigate();
+
+  const [userInfo, setUserInfo] = useState();
+
   useEffect(() => {
     if (window.innerWidth >= 1024) {
       setMenuShow(true);
     }
   });
+
+  useEffect(() => {
+    if (localStorage.getItem("user_info") !== null) {
+      setUserInfo(JSON.parse(decrypt(localStorage.getItem("user_info"))));
+    }
+  }, []);
 
   window.onresize = () => {
     if (window.innerWidth >= 1024) {
@@ -18,6 +28,7 @@ const Header = () => {
 
   const logout = () => {
     localStorage.clear();
+    setUserInfo(null);
     navigate("/");
   };
 
@@ -38,10 +49,7 @@ const Header = () => {
             <a href="/everydiary/" className="btn btn-ghost btn-sm rounded-btn">
               모두의 일기장
             </a>
-            <div
-              onClick={() => navigate("/relay")}
-              className="btn btn-ghost btn-sm rounded-btn"
-            >
+            <div onClick={() => navigate("/relay")} className="btn btn-ghost btn-sm rounded-btn">
               릴레이 소설
             </div>
             <a href="/signup/" className="btn btn-ghost btn-sm rounded-btn">
@@ -52,10 +60,7 @@ const Header = () => {
                 로그인
               </a>
             ) : (
-              <div
-                onClick={() => logout()}
-                className="btn btn-ghost btn-sm rounded-btn"
-              >
+              <div onClick={() => logout()} className="btn btn-ghost btn-sm rounded-btn">
                 로그아웃
               </div>
             )}
@@ -63,15 +68,13 @@ const Header = () => {
           <div
             id="burgerButton"
             className="flex-none xl:hidden lg:hidden "
-            onClick={() => setMenuShow(!menuShow)}
-          >
+            onClick={() => setMenuShow(!menuShow)}>
             <button className="btn btn-square btn-ghost">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                className="inline-block w-5 h-5 stroke-current"
-              >
+                className="inline-block w-5 h-5 stroke-current">
                 <path d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
             </button>
@@ -81,10 +84,7 @@ const Header = () => {
 
       <div
         id="burgerMenu"
-        className={`flex justify-end z-10 ${
-          menuShow ? "hidden" : ""
-        } sub-menu-fixed`}
-      >
+        className={`flex justify-end z-10 ${menuShow ? "hidden" : ""} sub-menu-fixed`}>
         <ul className="menu bg-neutral text-neutral-content w-screen">
           <a href="/topic/" className="btn btn-ghost">
             재미있는 일기 주제
