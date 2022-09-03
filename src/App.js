@@ -9,6 +9,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import React from "react";
 import AdminRoute from "./routes/AdminRoute";
+import MyRoute from "./routes/MyRoute";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/my/*" element={<MyRoute />} />
           <Route exact path="/relay/*" element={<RelayRoute />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<AdminRoute />} />

@@ -43,9 +43,9 @@ const Header = () => {
 
         <div className="flex-1 px-2 mx-2 navbar-end">
           <div className="items-stretch hidden lg:flex">
-            <a href="/classroom/" className="btn btn-ghost btn-sm rounded-btn">
+            <div onClick={() => navigate("/my")} className="btn btn-ghost btn-sm rounded-btn">
               내 일기장
-            </a>
+            </div>
             <a href="/everydiary/" className="btn btn-ghost btn-sm rounded-btn">
               모두의 일기장
             </a>
