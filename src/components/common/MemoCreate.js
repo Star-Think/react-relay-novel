@@ -1,7 +1,6 @@
 import BasicTemplate from "../../components/templates/BasicTemplate";
 
 const MemoCreate = () => {
-  const navigate = useNavigate();
   return (
     <BasicTemplate
       Content={() => {
