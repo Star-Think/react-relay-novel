@@ -3,9 +3,9 @@ import React from "react";
 const InputBox = ({
   type,
   autofocus,
-  maxlength,
+  maxLength,
   placeholder,
-  ref,
+  forwardRef,
   value,
   onChange,
 }) => {
@@ -16,9 +16,9 @@ const InputBox = ({
         style={{ width: "100%" }}
         type={type}
         {...(autofocus === true ? (autofocus = "") : null)}
-        maxlength={maxlength}
+        maxLength={maxLength}
         placeholder={placeholder}
-        ref={ref}
+        ref={forwardRef}
         value={value}
         onChange={onChange}
       />
@@ -29,7 +29,7 @@ const InputBox = ({
 InputBox.defaultProps = {
   type: "text",
   autofocus: false,
-  maxlength: "20",
+  maxLength: "20",
   placeholder: "",
   onChange: () => {},
 };

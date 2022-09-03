@@ -10,8 +10,8 @@ function Login() {
 
   const idRef = useRef();
   const pwdRef = useRef();
-  const [idText, setIdText] = useState();
-  const [pwdText, setPwdText] = useState();
+  const [idText, setIdText] = useState("");
+  const [pwdText, setPwdText] = useState("");
 
   const postLogin = async () => {
     await axios({
@@ -23,14 +23,34 @@ function Login() {
       },
     })
       .then((res) => {
-        console.log(res);
         localStorage.setItem("access_token", res.data.data);
+        return userInfo(res.data.data);
+      })
+      .then((res) => {
+        const data = res.data.data;
+        localStorage.setItem(
+          "user_info",
+          JSON.stringify({
+            user_id: data.user_id,
+            nickname: data.nickname,
+          })
+        );
         navigate("/");
       })
       .catch((err) => {
         console.log(err);
         alert("아이디 또는 비밀번호를 확인하세요");
       });
+  };
+
+  const userInfo = async (token) => {
+    return await axios({
+      method: "get",
+      url: "/star/api/users",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   return (
@@ -42,21 +62,18 @@ function Login() {
             autofocus={true}
             placeholder="아이디"
             value={idText}
-            ref={idRef}
+            forwardRef={idRef}
             onChange={(e) => setIdText(e.target.value)}
           />
           <InputBox
             type={"password"}
             placeholder="비밀번호"
             value={pwdText}
-            ref={pwdRef}
+            forwardRef={pwdRef}
             onChange={(e) => setPwdText(e.target.value)}
           />
           <div className="flex justify-end mt-5">
-            <button
-              className="btn btn-primary btn-block"
-              onClick={() => postLogin()}
-            >
+            <button className="btn btn-primary btn-block" onClick={() => postLogin()}>
               로그인
             </button>
           </div>
