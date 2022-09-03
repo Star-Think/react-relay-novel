@@ -1,44 +1,44 @@
-import React from 'react';
-import MemoItem from './MemoItem';
-import { useEffect, useState } from 'react';
-import { timeChange } from '../../utils/CommonFun';
+import React from "react";
+import MemoItem from "./MemoItem";
+import { useEffect, useState } from "react";
+import { timeChange } from "../../utils/CommonFun";
 
-const MemoList = ({ memoDataList }) => {
-	const [DateList, setDateList] = useState([]);
-	let dateList = [];
+const MemoList = ({ memoDataList, isMyMemo }) => {
+  const [DateList, setDateList] = useState([]);
+  let dateList = [];
 
-	useEffect(() => {
-		memoDataList.forEach((memoData) => {
-			if (dateList[dateList.length - 1] != memoData.date) {
-				dateList.push(memoData.date);
-			}
-		});
+  useEffect(() => {
+    memoDataList.forEach((memoData) => {
+      if (dateList[dateList.length - 1] != memoData.date) {
+        dateList.push(memoData.date);
+      }
+    });
 
-		setDateList(dateList);
-	}, []);
+    setDateList(dateList);
+  }, []);
 
-	return (
-		<>
-			{DateList.length !== 0 ? (
-				<div>
-					{DateList.map((date) => {
-						return (
-							<div key={date}>
-								<p className='text-center'>{timeChange(date)}</p>
-								<div className='container mx-auto flex flex-wrap justify-start'>
-									{memoDataList.map((mData) => {
-										if (mData.date === date) {
-											return <MemoItem key={mData.idx} memo={mData} />;
-										}
-									})}
-								</div>
-							</div>
-						);
-					})}
-				</div>
-			) : null}
-		</>
-	);
+  return (
+    <>
+      {DateList.length !== 0 ? (
+        <div>
+          {DateList.map((date) => {
+            return (
+              <div key={date}>
+                <p className="text-center">{timeChange(date)}</p>
+                <div className="container mx-auto flex flex-wrap justify-start">
+                  {memoDataList.map((mData) => {
+                    if (mData.date === date) {
+                      return <MemoItem key={mData.idx} memo={mData} isMyMemo={isMyMemo} />;
+                    }
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
+    </>
+  );
 };
 
 export default MemoList;
