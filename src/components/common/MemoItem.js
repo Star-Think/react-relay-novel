@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 
 const MemoItem = ({ memo, isMyMemo }) => {
   const navigate = useNavigate();
-  console.log(memo);
   return (
     <>
       <div className="lg:w-1/3 md:w-1/2 w-full p-5">
@@ -17,7 +16,7 @@ const MemoItem = ({ memo, isMyMemo }) => {
                     {memo.type === 0 ? (
                       <div className="badge badge-primary">모두 공개</div>
                     ) : (
-                      <div class="badge badge-error">비공개</div>
+                      <div className="badge badge-error">비공개</div>
                     )}
                     <div>
                       <p className="text-right text-sm text-gray-500">2022. 09. 03. 토요일</p>
