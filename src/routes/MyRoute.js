@@ -1,15 +1,18 @@
 import React from "react";
 
 import { Routes, Route } from "react-router-dom";
-import MemoCreate from "../components/common/MemoCreate";
-import MyDetail from "../pages/my/MyDetail";
 import MyMain from "../pages/my/MyMain";
+import MemoCreate from "../components/common/MemoCreate";
+import MyComment from "../pages/my/MyComment";
+import MyDetail from "../pages/my/MyDetail";
 
 const MyRoute = () => {
   return (
     <Routes>
       <Route exact path="/" element={<MyMain />} />
       <Route exact path="/create" element={<MemoCreate />} />
+      <Route exact path="/post-comment" element={<MyComment />} />
+      <Route exact path="/comment" element={<MyComment />} />
       <Route exact path="/detail/:idx" element={<MyDetail />} />
     </Routes>
   );
