@@ -6,7 +6,7 @@ export const memoData = [
     date: 1658195117794,
     user_name: "별생각",
     views: 0,
-    type: 0,
+    type: 1,
     state: 1,
   },
   {
@@ -16,7 +16,7 @@ export const memoData = [
     date: 1658195117794,
     user_name: "별생각",
     views: 1,
-    type: 0,
+    type: 1,
     state: 1,
   },
   {
