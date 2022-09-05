@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import MyTitle from "./MyTitle";
+import MyTitle from "../../components/common/MyTitle";
 import MemoList from "../../components/common/MemoList";
 import BasicTemplate from "../../components/templates/BasicTemplate";
 import { memoData } from "../../utils/MemoData";
@@ -27,7 +27,6 @@ const MyMain = () => {
     setMemoDataList(memoData.slice(fIndex, eIndex));
   };
 
-  console.log("memoDataList", memoDataList);
   return (
     <>
       <BasicTemplate
