@@ -8,7 +8,7 @@ const MyTitle = () => {
   const pathName = location.pathname;
 
   return (
-    <div className="container mx-auto w-full p-5">
+    <div className="container mx-auto w-full p-5" style={{ marginTop: "100px" }}>
       <div className="card shadow-lg w-full h-full break-all">
         <div className="card-body bg-primary h-72 xl:p-20 lg:p-20 sm:p-20 p-10">
           <div className="flex justify-end">

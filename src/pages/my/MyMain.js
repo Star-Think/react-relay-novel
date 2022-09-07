@@ -1,29 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import BasicTemplate from "../../components/templates/BasicTemplate";
 import MyTitle from "../../components/common/MyTitle";
-//import MemoList from "../../components/common/MemoList";
-//import { memoData } from "../../utils/MemoData";
+import MemoList from "../../components/common/MemoList";
 
-function MyMain() {
-  const token = localStorage.getItem("access_token");
-  const location = useLocation();
-  const page = location.state !== null ? location.state.page : 1;
+const MyMain = () => {
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
+  const token = localStorage.getItem("access_token");
+  const page = location.state !== null ? location.state.page : 1;
+  const pageParam = parseInt(page) ? parseInt(page) : 1;
+  const row = 23;
+  const fIndex = (pageParam - 1) * (row + 1);
+  const eIndex = fIndex + row + 1;
 
   async function getData() {
     try {
-      const response = await axios.get("/star/api/diaryGet", {
-        params: {
-          page: 1,
-          rows: 10,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(response);
+      const response = await axios.post(
+        "/star/api/diaryGet",
+        { page: pageParam, rows: row },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      const memoData = response.data.data.list;
+      setData(memoData.slice(fIndex, eIndex));
     } catch (error) {
       console.error(error);
     }
@@ -38,19 +39,6 @@ function MyMain() {
     getData();
   }, [page]);
 
-  /* useEffect(() => {
-    memoGet();
-  }, [page]);
-
-  const memoGet = () => {
-    const pageParam = parseInt(page) ? parseInt(page) : 1;
-    const row = 23;
-
-    const fIndex = (pageParam - 1) * (row + 1);
-    const eIndex = fIndex + row + 1;
-    setMemoDataList(memoData.slice(fIndex, eIndex));
-  }; */
-
   return (
     <>
       <BasicTemplate
@@ -58,13 +46,13 @@ function MyMain() {
           return (
             <>
               <MyTitle />
-              {/*<MemoList memoDataList={memoDataList} isMyMemo={true} />*/}
+              <MemoList memoDataList={data} isMyMemo={true} />
             </>
           );
         }}
       />
     </>
   );
-}
+};
 
 export default MyMain;
