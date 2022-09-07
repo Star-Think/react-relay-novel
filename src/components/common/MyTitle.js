@@ -6,23 +6,29 @@ const MyTitle = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const pathName = location.pathname;
+  const isComment = pathName.includes("comment");
 
   return (
     <div className="container mx-auto w-full p-5" style={{ marginTop: "100px" }}>
       <div className="card shadow-lg w-full h-full break-all">
         <div className="card-body bg-primary h-72 xl:p-20 lg:p-20 sm:p-20 p-10">
-          <div className="flex justify-end">
-            <div onClick={() => navigate("/mypage")} className="text-error link link-hover">
-              비밀번호 분실에 대비해서 이메일을 입력해주세요.
-            </div>
-          </div>
-
+          {isComment ? (
+            <></>
+          ) : (
+            <>
+              <div className="flex justify-end">
+                <div onClick={() => navigate("/mypage")} className="text-error link link-hover">
+                  비밀번호 분실에 대비해서 이메일을 입력해주세요.
+                </div>
+              </div>
+            </>
+          )}
           <h2 className="card-title">ㅇㅇ의 일기장</h2>
           <p></p>
         </div>
       </div>
 
-      {pathName.includes("comment") ? (
+      {isComment ? (
         <>
           <div className="container mx-auto flex justify-end mt-10">
             <div
