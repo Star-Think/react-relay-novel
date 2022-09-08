@@ -71,6 +71,13 @@ const Header = () => {
                 로그아웃
               </div>
             )}
+            {store.getState().user.userInfo.role === "ROLE_ADMIN" ? (
+              <div
+                onClick={() => navigate("/admin/diary")}
+                className="btn btn-ghost btn-sm rounded-btn">
+                관리자
+              </div>
+            ) : null}
           </div>
           <div
             id="burgerButton"
@@ -125,4 +132,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

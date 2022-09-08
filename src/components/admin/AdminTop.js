@@ -10,4 +10,4 @@ const AdminTop = () => {
   );
 };
 
-export default AdminTop;
+export default React.memo(AdminTop);

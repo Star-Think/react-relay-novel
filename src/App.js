@@ -19,7 +19,7 @@ function App() {
         <Route exact path="/my/*" element={<MyRoute />} />
         <Route exact path="/relay/*" element={<RelayRoute />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<AdminRoute />} />
+        <Route path="/admin/*" element={<AdminRoute />} />
       </Routes>
     </>
   );
