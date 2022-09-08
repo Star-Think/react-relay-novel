@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ADD_USERINFO } from "../../actions/ActionTypes";
+import store from "../../store";
 import { decrypt } from "../../utils/CryptoJsMake";
 
 const Header = () => {
@@ -18,6 +20,7 @@ const Header = () => {
     if (localStorage.getItem("user_info") !== null) {
       setUserInfo(JSON.parse(decrypt(localStorage.getItem("user_info"))));
     }
+    console.log(store.getState().user);
   }, []);
 
   window.onresize = () => {
@@ -29,6 +32,10 @@ const Header = () => {
   const logout = () => {
     localStorage.clear();
     setUserInfo(null);
+    store.dispatch({
+      type: ADD_USERINFO,
+      data: {},
+    });
     navigate("/");
   };
 
@@ -55,7 +62,7 @@ const Header = () => {
             <a href="/signup/" className="btn btn-ghost btn-sm rounded-btn">
               회원가입
             </a>
-            {localStorage.getItem("access_token") === null ? (
+            {!store.getState().user.userInfo.nickname ? (
               <a href="/login/" className="btn btn-ghost btn-sm rounded-btn">
                 로그인
               </a>

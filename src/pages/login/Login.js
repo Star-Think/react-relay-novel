@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import InputBox from "../../components/common/InputBox";
 import { encrypt } from "../../utils/CryptoJsMake";
+import store from "../../store";
+import { ADD_USERINFO } from "../../actions/ActionTypes";
 
 function Login() {
   const navigate = useNavigate();
@@ -29,15 +31,14 @@ function Login() {
       })
       .then((res) => {
         const data = res.data.data;
-        localStorage.setItem(
-          "user_info",
-          encrypt(
-            JSON.stringify({
-              user_id: data.user_id,
-              nickname: data.nickname,
-            })
-          )
-        );
+        store.dispatch({
+          type: ADD_USERINFO,
+          data: {
+            user_id: data.user_id,
+            nickname: data.nickname,
+            role: data.role,
+          },
+        });
         navigate("/");
       })
       .catch((err) => {

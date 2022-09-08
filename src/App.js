@@ -14,15 +14,13 @@ import MyRoute from "./routes/MyRoute";
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/my/*" element={<MyRoute />} />
-          <Route exact path="/relay/*" element={<RelayRoute />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<AdminRoute />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/my/*" element={<MyRoute />} />
+        <Route exact path="/relay/*" element={<RelayRoute />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<AdminRoute />} />
+      </Routes>
     </>
   );
 }

@@ -9,13 +9,8 @@ const HomeTopicContent = () => {
 
   return (
     <>
-      <div className="w-screen h-72 flex justify-center items-center mb-10 bg">
-        <video
-          autoPlay
-          muted
-          onEnded={() => videoEndEvent()}
-          className="tossteam-react__video"
-        >
+      <div className="w-screen flex justify-center items-center mb-10 bg">
+        <video autoPlay muted onEnded={() => videoEndEvent()} className="tossteam-react__video">
           <source src={"/video/backVideo.mp4"} type="video/mp4" />
         </video>
         <div className={`px-10 text ${endCheck ? "fade-in" : "display-none"} `}>
