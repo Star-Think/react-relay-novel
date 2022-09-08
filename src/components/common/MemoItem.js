@@ -31,6 +31,9 @@ const MemoItem = ({ memo, isMyMemo }) => {
                 <>
                   <div className="flex justify-between">
                     <p>{memo.user_name}</p>
+                    <p className="text-right text-sm text-gray-500">
+                      {timeChange(memo.update_date)}
+                    </p>
                   </div>
                   <div className="flex justify-between">
                     {memo.state === 1 ? (
@@ -38,14 +41,15 @@ const MemoItem = ({ memo, isMyMemo }) => {
                     ) : (
                       <div></div>
                     )}
+
                     <p className="text-sm text-gray-500 text-right">조회수 {memo.view}</p>
                   </div>
                 </>
               )}
+              <div className="divider my-0"></div>
+              <h2 className="card-title">{memo.title}</h2>
+              <p>{memo.content}</p>
             </div>
-            <div className="divider my-0"></div>
-            <h2 className="card-title">{memo.title}</h2>
-            <p>{memo.content}</p>
           </div>
         </div>
       </div>
