@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import store from "../../store";
 
 const MyTitle = () => {
+  const nickName = store.getState().user.userInfo.nickname;
   const navigate = useNavigate();
   const location = useLocation();
   const pathName = location.pathname;
@@ -23,7 +25,7 @@ const MyTitle = () => {
               </div>
             </>
           )}
-          <h2 className="card-title">ㅇㅇ의 일기장</h2>
+          <h2 className="card-title">{nickName}의 일기장</h2>
           <p></p>
         </div>
       </div>
