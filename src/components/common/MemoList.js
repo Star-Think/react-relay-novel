@@ -17,6 +17,7 @@ const MemoList = ({ memoDataList, isMyMemo }) => {
       }
       /* 가데이터일 경우 (from "../../utils/MemoData";) */
 
+      memoData.create_date = timeChange(memoData.create_date);
       if (dateList[dateList.length - 1] !== memoData.create_date) {
         dateList.push(memoData.create_date);
       }
@@ -31,7 +32,7 @@ const MemoList = ({ memoDataList, isMyMemo }) => {
           {DateList.map((date) => {
             return (
               <div key={date}>
-                <p className="text-center">{timeChange(date)}</p>
+                <p className="text-center">{date}</p>
                 <div className="container mx-auto flex flex-wrap justify-start">
                   {memoDataList.map((mData) => {
                     if (mData.create_date === date) {

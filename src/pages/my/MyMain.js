@@ -20,7 +20,7 @@ const MyMain = () => {
     try {
       const response = await axios.post(
         "/star/api/diaryGet",
-        { page: pageParam, rows: row },
+        {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const memoData = response.data.data.list;
