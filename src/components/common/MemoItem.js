@@ -21,7 +21,7 @@ const MemoItem = ({ memo, isMyMemo }) => {
                     )}
                     <div>
                       <p className="text-right text-sm text-gray-500">
-                        {timeChange(memo.update_date)}
+                        {timeChange(memo.create_date)}
                       </p>
                       <p className="text-sm text-gray-500 text-right">조회수 {memo.view}</p>
                     </div>
@@ -32,7 +32,7 @@ const MemoItem = ({ memo, isMyMemo }) => {
                   <div className="flex justify-between">
                     <p>{memo.user_name}</p>
                     <p className="text-right text-sm text-gray-500">
-                      {timeChange(memo.update_date)}
+                      {timeChange(memo.create_date)}
                     </p>
                   </div>
                   <div className="flex justify-between">

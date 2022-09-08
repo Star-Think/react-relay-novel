@@ -9,16 +9,16 @@ const MemoList = ({ memoDataList, isMyMemo }) => {
 
   useEffect(() => {
     memoDataList.forEach((memoData) => {
-      /* 가데이터일 경우 update_date->date, idx->seq(from "../../utils/MemoData";) */
-      if (!memoData.update_date) {
-        memoData.update_date = memoData.date;
+      /* 가데이터일 경우 create_date->date, idx->seq(from "../../utils/MemoData";) */
+      if (!memoData.create_date) {
+        memoData.create_date = memoData.date;
         memoData.seq = memoData.idx;
         memoData.view = memoData.views;
       }
       /* 가데이터일 경우 (from "../../utils/MemoData";) */
 
-      if (dateList[dateList.length - 1] !== memoData.update_date) {
-        dateList.push(memoData.update_date);
+      if (dateList[dateList.length - 1] !== memoData.create_date) {
+        dateList.push(memoData.create_date);
       }
     });
     setDateList(dateList);
@@ -34,7 +34,7 @@ const MemoList = ({ memoDataList, isMyMemo }) => {
                 <p className="text-center">{timeChange(date)}</p>
                 <div className="container mx-auto flex flex-wrap justify-start">
                   {memoDataList.map((mData) => {
-                    if (mData.update_date === date) {
+                    if (mData.create_date === date) {
                       return <MemoItem key={mData.seq} memo={mData} isMyMemo={isMyMemo} />;
                     }
                   })}
