@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 import store from "../../store";
 
 const MyTitle = () => {
@@ -9,6 +10,35 @@ const MyTitle = () => {
   const location = useLocation();
   const pathName = location.pathname;
   const isComment = pathName.includes("comment");
+
+  const token = localStorage.getItem("access_token");
+  const page = location.state !== null ? location.state.page : 1;
+  const pageParam = parseInt(page) ? parseInt(page) : 1;
+  const row = 12;
+
+  const handleClick = (type) => {
+    setData(type);
+  };
+
+  async function setData(type) {
+    try {
+      let response = await axios.post(
+        //`/star/api/${type === "received" ? "commentReceivedGet" : "commentGet"}`,
+        "/star/api/diaryGet", // comment데이터 없어서 임시로
+        {
+          page: pageParam,
+          rows: row,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      const commentList = response.data.data.list;
+      navigate(`/my/${type === "received" ? "received-comment" : "comment"}`, {
+        state: { commentList },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="container mx-auto w-full p-5" style={{ marginTop: "100px" }}>
@@ -49,12 +79,18 @@ const MyTitle = () => {
               <i className="fa-solid fa-pencil"></i>&nbsp;일기 쓰기
             </div>
             <div
-              onClick={() => navigate("/my/post-comment")}
+              onClick={() => {
+                handleClick("received");
+                navigate("/my/receive-comment");
+              }}
               className="btn btn-warning btn-xs sm:btn-sm md:btn-md lg:btn-md mx-2">
               <i className="fa-solid fa-comment"></i>&nbsp;내가 받은 댓글
             </div>
             <div
-              onClick={() => navigate("/my/comment")}
+              onClick={() => {
+                handleClick("");
+                navigate("/my/comment");
+              }}
               className="btn btn-info btn-xs sm:btn-sm md:btn-md lg:btn-md">
               <i className="fa-solid fa-hand-holding-heart"></i>&nbsp;내가 쓴 댓글
             </div>
