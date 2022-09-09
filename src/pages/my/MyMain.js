@@ -4,6 +4,7 @@ import axios from "axios";
 import BasicTemplate from "../../components/templates/BasicTemplate";
 import MyTitle from "../../components/common/MyTitle";
 import MemoList from "../../components/common/MemoList";
+import MemoPage from "../../components/common/MemoPage";
 
 const MyMain = () => {
   const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ const MyMain = () => {
   const token = localStorage.getItem("access_token");
   const page = location.state !== null ? location.state.page : 1;
   const pageParam = parseInt(page) ? parseInt(page) : 1;
-  const row = 23;
+  const row = 12;
   const fIndex = (pageParam - 1) * (row + 1);
   const eIndex = fIndex + row + 1;
 
@@ -47,6 +48,7 @@ const MyMain = () => {
             <>
               <MyTitle />
               <MemoList memoDataList={data} isMyMemo={true} />
+              <MemoPage memoDataCount={data.length} />
             </>
           );
         }}

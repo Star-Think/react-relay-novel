@@ -17,7 +17,10 @@ const MemoList = ({ memoDataList, isMyMemo }) => {
       }
       /* 가데이터일 경우 (from "../../utils/MemoData";) */
 
-      memoData.create_date = timeChange(memoData.create_date);
+      if (!memoData.formatted_create_date) {
+        memoData.formatted_create_date = timeChange(memoData.create_date);
+        memoData.create_date = memoData.formatted_create_date;
+      }
       if (dateList[dateList.length - 1] !== memoData.create_date) {
         dateList.push(memoData.create_date);
       }
