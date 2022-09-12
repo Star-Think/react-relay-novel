@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonItem from "../common/ButtonItem";
 
-const AdminBtnTop = () => {
+const AdminBtnTop = ({ select, setSelect, setPage }) => {
   const navigate = useNavigate();
   return (
     <div className="container mx-auto flex flex-wrap justify-end mt-10">
@@ -10,15 +10,18 @@ const AdminBtnTop = () => {
         <select
           name="public"
           className="select select-bordered select-primary w-full max-w-xs"
-          id="id_public">
-          <option value="" selected="">
-            전체
-          </option>
+          id="id_public"
+          value={select}
+          onChange={(e) => {
+            setPage(1);
+            setSelect(e.target.value);
+          }}>
+          <option value="">전체</option>
 
-          <option value="class">신고중</option>
+          <option value="0">신고중</option>
 
-          <option value="private">승인</option>
-          <option value="private">미승인</option>
+          <option value="1">승인</option>
+          <option value="2">미승인</option>
         </select>
       </p>
       <ButtonItem
