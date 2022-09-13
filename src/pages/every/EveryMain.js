@@ -1,10 +1,10 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import MemoList from "../../components/common/MemoList";
 import MemoPage from "../../components/common/MemoPage";
 import MemoTitle from "../../components/common/MemoTitle";
 import BasicTemplate from "../../components/templates/BasicTemplate";
-import { memoData } from "../../utils/MemoData";
 
 const EveryMain = () => {
   const [memoDataList, setMemoDataList] = useState([]);
@@ -12,30 +12,39 @@ const EveryMain = () => {
   const page = location.state !== null ? location.state.page : 1;
   const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem("access_token") === null) {
-      navigate("/login");
-    }
-    memoGet();
+    getData();
     window.scrollTo(0, 0);
   }, [page]);
 
-  const memoGet = () => {
-    memoData.sort((a, b) => {
-      if (a.date > b.date) {
-        return -1;
-      }
-      if (a.date < b.date) {
-        return 1;
-      }
-      return 0;
-    });
-    const pageParam = parseInt(page) ? parseInt(page) : 1;
-    const row = 23;
+  async function getData() {
+    const token = localStorage.getItem("access_token");
+    try {
+      const response = await axios.post("/star/api/diaryGet", {
+        page: page,
+      });
+      console.log(response);
+      const memoData = response.data.data.list;
 
-    const fIndex = (pageParam - 1) * (row + 1);
-    const eIndex = fIndex + row + 1;
-    setMemoDataList(memoData.slice(fIndex, eIndex));
-  };
+      memoData.sort((a, b) => {
+        if (a.date > b.date) {
+          return -1;
+        }
+        if (a.date < b.date) {
+          return 1;
+        }
+        return 0;
+      });
+      const pageParam = parseInt(page) ? parseInt(page) : 1;
+      const row = 23;
+
+      const fIndex = (pageParam - 1) * (row + 1);
+      const eIndex = fIndex + row + 1;
+
+      setMemoDataList(memoData.slice(fIndex, eIndex));
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <>
@@ -43,9 +52,9 @@ const EveryMain = () => {
         Content={() => {
           return (
             <>
-              <MemoTitle title={"모두의 메모"} />
+              <MemoTitle title={"모두의 일기"} />
               <MemoList memoDataList={memoDataList} />
-              <MemoPage memoDataCount={memoData.length} />
+              <MemoPage memoDataCount={memoDataList.length} />
             </>
           );
         }}
