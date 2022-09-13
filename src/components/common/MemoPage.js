@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const MemoPage = ({ memoDataCount }) => {
+const MemoPage = ({ memoDataCount, path, row }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const page = location.state !== null ? location.state.page : 1;
@@ -9,7 +9,7 @@ const MemoPage = ({ memoDataCount }) => {
   const [PageNum, setPageNum] = useState([]);
 
   const pageCalculation = () => {
-    setTotalPage(Math.ceil(memoDataCount / 24.0));
+    setTotalPage(Math.ceil(memoDataCount / row));
   };
 
   const setPage = () => {
@@ -21,27 +21,27 @@ const MemoPage = ({ memoDataCount }) => {
       numList.push((page / 5) * 5 - i);
     }
     for (let i = 0; i < back; i++) {
-      if ((page / 5) * 5 + i > Math.ceil(memoDataCount / 24.0)) break;
+      if ((page / 5) * 5 + i > Math.ceil(memoDataCount / row)) break;
       numList.push((page / 5) * 5 + i);
     }
-
     setPageNum(numList);
   };
 
   useEffect(() => {
     pageCalculation();
     setPage();
+    window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="btn-group flex justify-center mt-20">
       {page !== 1 ? (
-        <div onClick={() => navigate("/everydiary", { state: { page: 1 } })} className="btn">
+        <div onClick={() => navigate(path, { state: { page: 1 } })} className="btn">
           &lt;&lt;
         </div>
       ) : null}
       {page !== 1 ? (
-        <div onClick={() => navigate("/everydiary", { state: { page: page - 1 } })} className="btn">
+        <div onClick={() => navigate(path, { state: { page: page - 1 } })} className="btn">
           &lt;
         </div>
       ) : null}
@@ -52,13 +52,13 @@ const MemoPage = ({ memoDataCount }) => {
             {page === pg ? (
               <div
                 className="btn btn-primary bg-black text-white"
-                onClick={() => navigate("/everydiary", { state: { page: pg } })}>
+                onClick={() => navigate(path, { state: { page: pg } })}>
                 {pg}
               </div>
             ) : (
               <div
                 className="btn btn-primary"
-                onClick={() => navigate("/everydiary", { state: { page: pg } })}>
+                onClick={() => navigate(path, { state: { page: pg } })}>
                 {pg}
               </div>
             )}
@@ -67,14 +67,12 @@ const MemoPage = ({ memoDataCount }) => {
       })}
 
       {page !== totalPage ? (
-        <div onClick={() => navigate("/everydiary", { state: { page: page + 1 } })} className="btn">
+        <div onClick={() => navigate(path, { state: { page: page + 1 } })} className="btn">
           &gt;
         </div>
       ) : null}
       {page !== totalPage ? (
-        <div
-          onClick={() => navigate("/everydiary", { state: { page: totalPage } })}
-          className="btn">
+        <div onClick={() => navigate(path, { state: { page: totalPage } })} className="btn">
           &gt;&gt;
         </div>
       ) : null}
