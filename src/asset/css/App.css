@@ -27,6 +27,54 @@ footer {
   transform: translateY(100%);
 }
 
+.MyPage {
+margin-top: 60px;
+  height : auto;
+  position : relative ;
+  padding-bottom : 220px;
+  text-align: center;
+
+
+}
+
+.MyPage input, textarea {
+
+  margin-bottom: 20px;
+  border: 1px solid rgb(249,215,47);
+  border-radius: 5px;
+
+  
+
+}
+
+.MyDiary {
+  margin : auto;
+  padding-left: 20px;
+  padding-top : 40px;
+
+}
+.MyDiary .container {
+ width: 90%;
+ height : 300px;
+ margin : auto;
+ background-color : rgb(249,215,47);
+ border-radius : 5px;
+
+}
+
+.MyDiary button {
+  width : 200px;
+  padding : 10px;
+  cursor : pointer;
+ float: right;
+ background-color: 
+
+}
+
+.MyDiary .diaryList {
+  padding-top: 20px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

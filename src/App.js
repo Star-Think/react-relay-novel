@@ -3,7 +3,7 @@ import "./asset/css/tailwind.min.css";
 import "./asset/css/font-awesome.css";
 import "./asset/css/App.css";
 import "aos/dist/aos.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import RelayRoute from "./routes/RelayRoute";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
