@@ -1,8 +1,31 @@
-import React from "react";
-import { timeChange } from "../../utils/CommonFun";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import MemoComment from "./MemoComment";
 
 const MemoDetail = ({ memo }) => {
+  const [commentData, setCommentData] = useState([]);
+  const token = localStorage.getItem("access_token");
+  const memoSeq = memo.seq;
+  const getData = async () => {
+    try {
+      const response = await axios.post(
+        "/star/api/diaryDetail",
+        { seq: memoSeq },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      const data = response.data.data.clist;
+      setCommentData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (memo.seq) {
+      getData();
+    }
+  }, [memo.seq]);
+
   return (
     <>
       <div className="flex justify-center mt-5 mx-5">
@@ -44,8 +67,7 @@ const MemoDetail = ({ memo }) => {
           </div>
         </div>
       </div>
-
-      <MemoComment />
+      {commentData.length > 0 ? <MemoComment data={commentData} /> : <></>}
     </>
   );
 };
