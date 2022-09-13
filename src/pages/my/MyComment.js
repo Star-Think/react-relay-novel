@@ -18,7 +18,11 @@ const MyComment = () => {
             <>
               <MyTitle />
               {commentLength > 0 ? (
-                <CommentList commentList={state.commentList} />
+                <CommentList
+                  commentList={state.commentList}
+                  memoDataList={state.memoDataList}
+                  path={"/my"}
+                />
               ) : (
                 <CommentListEmpty />
               )}

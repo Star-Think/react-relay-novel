@@ -4,8 +4,9 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import store from "../../store";
 
-const MyTitle = () => {
+const MyTitle = ({ memoDataList }) => {
   const nickName = store.getState().user.userInfo.nickname;
+  const userId = store.getState().user.userInfo.user_id;
   const navigate = useNavigate();
   const location = useLocation();
   const pathName = location.pathname;
@@ -23,17 +24,17 @@ const MyTitle = () => {
   async function setData(type) {
     try {
       let response = await axios.post(
-        //`/star/api/${type === "received" ? "commentReceivedGet" : "commentGet"}`,
-        "/star/api/diaryGet", // comment데이터 없어서 임시로
+        `/star/api/${type === "received" ? "commentReceivedGet" : "commentGet"}`,
         {
           page: pageParam,
           rows: row,
+          view_id: userId,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const commentList = response.data.data.list;
       navigate(`/my/${type === "received" ? "received-comment" : "comment"}`, {
-        state: { commentList },
+        state: { commentList: commentList, memoDataList: memoDataList },
       });
     } catch (error) {
       console.error(error);

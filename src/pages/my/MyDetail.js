@@ -8,7 +8,7 @@ import BasicTemplate from "../../components/templates/BasicTemplate";
 const MyDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const data = [location.state.data];
+  const data = Array.isArray(location.state.data) ? location.state.data : [location.state.data];
   const { idx } = useParams();
   const [memo, setMemo] = useState({});
 

@@ -45,7 +45,7 @@ const MyMain = () => {
         Content={() => {
           return (
             <>
-              <MyTitle />
+              <MyTitle memoDataList={data} />
               <MemoList memoDataList={data} path={"/my"} />
               <MemoPage memoDataCount={totalDataCount} path={"/my"} row={row} />
             </>
