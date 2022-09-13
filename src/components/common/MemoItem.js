@@ -6,7 +6,7 @@ const MemoItem = ({ memo, path }) => {
 
   return (
     <>
-      <div className="lg:w-1/3 md:w-1/2 w-full p-5">
+      <div className="lg:w-1/4 md:w-1/2 w-full p-5">
         <div
           onClick={() => navigate(`${path}/detail/${memo.seq}`, { state: { data: memo } })}
           style={{ cursor: "pointer" }}>
