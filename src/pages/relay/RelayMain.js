@@ -11,6 +11,8 @@ const RelayMain = () => {
   const location = useLocation();
   const page = location.state !== null ? location.state.page : 1;
   const navigate = useNavigate();
+  const row = 24;
+
   useEffect(() => {
     if (localStorage.getItem("access_token") === null) {
       navigate("/login");
@@ -21,8 +23,6 @@ const RelayMain = () => {
 
   const memoGet = () => {
     const pageParam = parseInt(page) ? parseInt(page) : 1;
-    const row = 23;
-
     const fIndex = (pageParam - 1) * (row + 1);
     const eIndex = fIndex + row + 1;
     setMemoDataList(memoData.slice(fIndex, eIndex));
@@ -36,7 +36,7 @@ const RelayMain = () => {
             <>
               <MemoTitle title={"릴레이 소설"} />
               <MemoList memoDataList={memoDataList} />
-              <MemoPage memoDataCount={memoData.length} />
+              <MemoPage memoDataCount={memoData.length} path={"/relay"} row={row} />
             </>
           );
         }}
