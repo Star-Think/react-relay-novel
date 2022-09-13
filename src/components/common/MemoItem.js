@@ -4,7 +4,7 @@ const MemoItem = ({ memo, isMyMemo }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="lg:w-1/3 md:w-1/2 w-full p-5">
+      <div className="lg:w-1/4 md:w-1/2 w-full p-5">
         <div
           onClick={() => navigate(`/everydiary/detail/${memo.seq}`)}
           style={{ cursor: "pointer" }}>
