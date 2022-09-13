@@ -3,7 +3,7 @@ import MemoItem from "./MemoItem";
 import { useEffect, useState } from "react";
 import { timeChange } from "../../utils/CommonFun";
 
-const MemoList = ({ memoDataList, isMyMemo }) => {
+const MemoList = ({ memoDataList, path }) => {
   const [DateList, setDateList] = useState([]);
   let dateList = [];
 
@@ -39,7 +39,7 @@ const MemoList = ({ memoDataList, isMyMemo }) => {
                 <div className="container mx-auto flex flex-wrap justify-start">
                   {memoDataList.map((mData) => {
                     if (mData.create_date === date) {
-                      return <MemoItem key={mData.seq} memo={mData} isMyMemo={isMyMemo} />;
+                      return <MemoItem key={mData.seq} memo={mData} path={path} />;
                     }
                   })}
                 </div>
