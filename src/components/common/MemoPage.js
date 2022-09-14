@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const MemoPage = ({ memoDataCount, path, row }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const page = location.state !== null ? location.state.page : 1;
+  const page = location.state && !path.includes("comment") ? location.state.page : 1;
   const [totalPage, setTotalPage] = useState(1);
   const [PageNum, setPageNum] = useState([]);
 
