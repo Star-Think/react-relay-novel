@@ -59,9 +59,18 @@ const Header = () => {
             <div onClick={() => navigate("/relay")} className="btn btn-ghost btn-sm rounded-btn">
               릴레이 소설
             </div>
-            <a href="/signup/" className="btn btn-ghost btn-sm rounded-btn">
+            {/* <a href="/signup/" className="btn btn-ghost btn-sm rounded-btn">
               회원가입
-            </a>
+            </a> */}
+            {!store.getState().user.userInfo.nickname ? (
+              <a href="/signup/" className="btn btn-ghost btn-sm rounded-btn">
+                회원가입
+              </a>
+            ) : (
+              <div onClick={() => navigate("/mypage")} className="btn btn-ghost btn-sm rounded-btn">
+                {store.getState().user.userInfo.nickname}의 마이페이지
+              </div>
+            )}
             {!store.getState().user.userInfo.nickname ? (
               <a href="/login/" className="btn btn-ghost btn-sm rounded-btn">
                 로그인
