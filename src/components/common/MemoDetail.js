@@ -82,7 +82,11 @@ const MemoDetail = ({ memo }) => {
             <div onClick={() => navigate("/my/create", { state: { data: memo } })} className="btn">
               수정
             </div>
-            <div className="btn btn-error ml-2">삭제</div>
+            <div
+              onClick={() => navigate("/my/delete", { state: { seq: memo.seq } })}
+              className="btn btn-error ml-2">
+              삭제
+            </div>
           </div>
         </div>
       ) : (
