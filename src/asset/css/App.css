@@ -28,47 +28,38 @@ footer {
 }
 
 .MyPage {
-margin-top: 60px;
-  height : auto;
-  position : relative ;
-  padding-bottom : 220px;
+  margin-top: 60px;
+  height: auto;
+  position: relative;
+  padding-bottom: 220px;
   text-align: center;
-
-
 }
 
-.MyPage input, textarea {
-
+.MyPage input,
+textarea {
   margin-bottom: 20px;
-  border: 1px solid rgb(249,215,47);
+  border: 1px solid rgb(249, 215, 47);
   border-radius: 5px;
-
-  
-
 }
 
 .MyDiary {
-  margin : auto;
+  margin: auto;
   padding-left: 20px;
-  padding-top : 40px;
-
+  padding-top: 40px;
 }
 .MyDiary .container {
- width: 90%;
- height : 300px;
- margin : auto;
- background-color : rgb(249,215,47);
- border-radius : 5px;
-
+  width: 90%;
+  height: 300px;
+  margin: auto;
+  background-color: rgb(249, 215, 47);
+  border-radius: 5px;
 }
 
 .MyDiary button {
-  width : 200px;
-  padding : 10px;
-  cursor : pointer;
- float: right;
- background-color: 
-
+  width: 200px;
+  padding: 10px;
+  cursor: pointer;
+  float: right;
 }
 
 .MyDiary .diaryList {
@@ -78,7 +69,6 @@ margin-top: 60px;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 textarea {
   resize: none;
