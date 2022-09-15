@@ -78,9 +78,7 @@ const MyPage = () => {
             className="input input-primary input-bordered my-2"
             name="nickname"
             value={nickname.nickname || ''}
-           
           />
-
           <h2>자기소개</h2>
           <textarea
             style={width100}
