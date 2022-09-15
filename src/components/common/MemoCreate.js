@@ -15,8 +15,7 @@ const MemoCreate = () => {
     title: "",
     content: "",
   });
-console.log(locationData)
-console.log(location)
+
   const options = [
     { key: "0", value: "모두 공개" },
     { key: "1", value: "비공개" },
