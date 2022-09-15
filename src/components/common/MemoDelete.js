@@ -15,7 +15,7 @@ const MemoDelete = () => {
     deleteData();
   };
 
-  async function deleteData() {
+  const deleteData = async () => {
     try {
       const url = isComment ? "/star/api/commentDelete" : "/star/api/diaryDelete";
       const response = await axios.post(
@@ -29,7 +29,7 @@ const MemoDelete = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);

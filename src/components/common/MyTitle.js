@@ -1,6 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import store from "../../store";
 
@@ -17,11 +16,13 @@ const MyTitle = ({ memoDataList }) => {
   const pageParam = parseInt(page) ? parseInt(page) : 1;
   const row = 12;
 
+  const [email, setEmail] = useState("");
+
   const handleClick = (type) => {
     setData(type);
   };
 
-  async function setData(type) {
+  const setData = async (type) => {
     try {
       let response = await axios.post(
         `/star/api/${type === "received" ? "commentReceivedGet" : "commentGet"}`,
@@ -39,13 +40,28 @@ const MyTitle = ({ memoDataList }) => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
+
+  const getUserInfo = async (type) => {
+    try {
+      let response = await axios.post("/star/api/myPageGet", "", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setEmail(response.data.data.email);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   return (
     <div className="container mx-auto w-full p-5" style={{ marginTop: "100px" }}>
       <div className="card shadow-lg w-full h-full break-all">
         <div className="card-body bg-primary h-72 xl:p-20 lg:p-20 sm:p-20 p-10">
-          {isComment ? (
+          {isComment || (!isComment && email) ? (
             <></>
           ) : (
             <>

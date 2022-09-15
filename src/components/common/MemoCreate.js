@@ -39,7 +39,7 @@ const MemoCreate = () => {
     });
   };
 
-  async function setData() {
+  const setData = async () => {
     try {
       const url = isEdit ? "/star/api/diaryUpdate" : "/star/api/diaryAdd";
       const params = isEdit
@@ -62,7 +62,7 @@ const MemoCreate = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);

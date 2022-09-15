@@ -36,7 +36,7 @@ const CommentEdit = () => {
     });
   };
 
-  async function setData() {
+  const setData = async () => {
     try {
       const response = await axios.post(
         "/star/api/commentUpdate",
@@ -54,7 +54,7 @@ const CommentEdit = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
