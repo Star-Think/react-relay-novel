@@ -67,7 +67,8 @@ const Signup = () => {
                             })
                             .catch((err) => {
                               console.log(err);
-                                alert('에러');
+                                alert('중복된 아이디입니다.');
+                                setIdText("")
                             });
                     } else {
                         alert("모든 기입란에 기입해주세요");
