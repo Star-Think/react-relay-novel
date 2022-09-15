@@ -54,7 +54,9 @@ const MyTitle = ({ memoDataList }) => {
   };
 
   useEffect(() => {
-    getUserInfo();
+    if (!isComment) {
+      getUserInfo();
+    }
   }, []);
 
   return (
