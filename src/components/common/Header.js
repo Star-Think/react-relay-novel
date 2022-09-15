@@ -20,7 +20,6 @@ const Header = () => {
     if (localStorage.getItem("user_info") !== null) {
       setUserInfo(JSON.parse(decrypt(localStorage.getItem("user_info"))));
     }
-    console.log(store.getState().user);
   }, []);
 
   window.onresize = () => {

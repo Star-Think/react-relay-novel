@@ -6,11 +6,11 @@ import { useEffect } from "react";
 
 const MyPage = () => {
   const marginTop = {
-    marginTop: '180px'
-  }
+    marginTop: "180px",
+  };
   const width100 = {
-    width: '100%'
-  }
+    width: "100%",
+  };
 
   const [data, setData] = useState([]);
   const [nickname, setNickname] = useState("");
@@ -20,12 +20,15 @@ const MyPage = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.post(
-        "/star/api/myPageGet",
-         {headers: { Authorization: `Bearer ${token}` } }
-        );
-        const userData = response.data;
-        setData(userData.data)
+      const response = await axios({
+        method: "post",
+        url: "/star/api/myPageGet",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const userData = response.data;
+      setData(userData.data);
     } catch (error) {
       console.error(error);
     }
@@ -35,16 +38,13 @@ const MyPage = () => {
     getData();
   }, []);
 
-
-  const editMe = async() => {
-
-  }
+  const editMe = async () => {};
 
   return (
     <div>
       <Header />
       <div className="flex justify-center mt-20" style={marginTop}>
-          {/* MyPage */}
+        {/* MyPage */}
         <form className="xl:w-2/12 lg:w-4/12 md:w-6/12 sm:w-8/12 w-10/12">
           <div className="label-text">닉네임</div>
           <input
@@ -76,9 +76,11 @@ const MyPage = () => {
           <div className="flex justify-end">
             <button
               className="btn btn-primary btn-block"
-              onClick={() => {alert("변경하시겠습니까?"); editMe();}}
-              type="submit"
-            >
+              onClick={() => {
+                alert("변경하시겠습니까?");
+                editMe();
+              }}
+              type="submit">
               변경하기
             </button>
           </div>
