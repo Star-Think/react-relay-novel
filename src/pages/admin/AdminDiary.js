@@ -8,7 +8,6 @@ import AdminTop from "../../components/admin/AdminTop";
 import Footer from "../../components/common/Footer";
 import Header from "../../components/common/Header";
 import Loading from "../../components/common/Loading";
-import LoadingModal from "../../components/common/LoadingModal";
 import Pagination from "../../components/common/Pagination";
 import { timeChange } from "../../utils/CommonFun";
 
@@ -86,7 +85,6 @@ const AdminDiary = () => {
       })}
 
       <Footer />
-      {loading && <LoadingModal show={loading} setShow={setLoading}></LoadingModal>}
     </>
   );
 };
