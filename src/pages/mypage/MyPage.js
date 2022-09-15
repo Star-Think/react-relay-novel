@@ -14,7 +14,7 @@ const MyPage = () => {
 
   const [data, setData] = useState([]);
   const [nickname, setNickname] = useState("");
-  const [introduction, setIntroduction] = useState("");
+  const [self, setSelf] = useState("");
   const [email, setEmail] = useState("");
   const token = localStorage.getItem("access_token");
 
@@ -33,44 +33,68 @@ const MyPage = () => {
       console.error(error);
     }
   };
+  useEffect(()=> {
+    getData();
+  }, [])
 
   useEffect(() => {
-    getData();
-  }, []);
+    setNickname({nickname: data? data.nickname: ""})
+    setSelf({self: data? data.self: ""})
+    setEmail({email: data? data.email : ""})
+  }, [data]);
 
-  const editMe = async () => {};
+  const handleChangeState = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
 
+  async function editMe() {
+    try {
+      const url = "/star/api/myPageUpdate";
+      const params = {
+        nickname: data.nickname,
+        self: data.self,
+        email: data.email
+      }
+        const response = await axios.post(url, params, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+}
   return (
     <div>
       <Header />
       <div className="flex justify-center mt-20" style={marginTop}>
-        {/* MyPage */}
         <form className="xl:w-2/12 lg:w-4/12 md:w-6/12 sm:w-8/12 w-10/12">
           <div className="label-text">닉네임</div>
           <input
             style={width100}
             className="input input-primary input-bordered my-2"
             name="nickname"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
+            value={nickname.nickname || ''}
+            onChange={handleChangeState}
           />
 
           <h2>자기소개</h2>
           <textarea
             style={width100}
             className="textarea h-36 textarea-bordered textarea-primary"
-            name="introduction"
-            value={introduction}
-            onChange={(e) => setIntroduction(e.target.value)}
-            placeholder="자기소개"
-          />
+            name="self"
+            value={self.self || ''}
+            onChange={handleChangeState}
+            placeholder="자기소개"></textarea>
           <div className="label-text">이메일</div>
           <input
             style={width100}
             className="input input-primary input-bordered my-2"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={email.email || ''}
+            onChange={handleChangeState}
             placeholder="이메일"
           />
           <div className="flex justify-end">
