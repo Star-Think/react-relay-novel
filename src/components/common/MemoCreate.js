@@ -22,18 +22,6 @@ const MemoCreate = () => {
   ];
   const { isPublic, title, content } = state;
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (locationData) {
-      setIsEdit(true);
-      setState({
-        isPublic: locationData.type,
-        title: locationData.title,
-        content: locationData.content,
-      });
-    }
-  }, []);
-
   const handleChangeState = (e) => {
     const { value, name } = e.target;
     setState({
@@ -76,6 +64,18 @@ const MemoCreate = () => {
     }
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (locationData) {
+      setIsEdit(true);
+      setState({
+        isPublic: locationData.type,
+        title: locationData.title,
+        content: locationData.content,
+      });
+    }
+  }, []);
+
   return (
     <>
       <Header />
@@ -92,8 +92,8 @@ const MemoCreate = () => {
                   className="select select-bordered select-primary w-full max-w-xs"
                   id="id_public"
                   onChange={handleChangeState}
-                  value={state.isPublic}>
-                  {options.map((item, index) => (
+                  value={isPublic}>
+                  {options.map((item) => (
                     <option key={item.key} value={item.key}>
                       {item.value}
                     </option>
