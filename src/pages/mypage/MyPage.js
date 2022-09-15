@@ -1,11 +1,8 @@
-import BasicTemplate from "../../components/templates/BasicTemplate";
 import React, { useState } from "react";
-import store from "../../store";
 import Header from "../../components/common/Header";
 import Footer from "../../components/common/Footer";
 import axios from "axios";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
 const MyPage = () => {
   const marginTop = {
@@ -16,16 +13,18 @@ const MyPage = () => {
   }
 
   const [data, setData] = useState([]);
-  const [nickname, setNickname] = useState(store.getState().user.userInfo.nickname);
+  const [nickname, setNickname] = useState("");
   const [introduction, setIntroduction] = useState("");
   const [email, setEmail] = useState("");
+  const token = localStorage.getItem("access_token");
 
   const getData = async () => {
     try {
       const response = await axios.post(
-        "/star/api/myPageGet", {
-        });
-        const userData = response.data.data;
+        "/star/api/myPageGet",
+         {headers: { Authorization: `Bearer ${token}` } }
+        );
+        const userData = response.data;
         setData(userData.data)
     } catch (error) {
       console.error(error);
