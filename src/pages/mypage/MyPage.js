@@ -43,7 +43,7 @@ const MyPage = () => {
     setEmail({email: data? data.email : ""})
   }, [data]);
 
-  const handleChangeState = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setData({
       ...data,
@@ -74,10 +74,11 @@ const MyPage = () => {
           <div className="label-text">닉네임</div>
           <input
             style={width100}
+            onChange={handleChange}
             className="input input-primary input-bordered my-2"
             name="nickname"
             value={nickname.nickname || ''}
-            onChange={handleChangeState}
+           
           />
 
           <h2>자기소개</h2>
@@ -86,7 +87,7 @@ const MyPage = () => {
             className="textarea h-36 textarea-bordered textarea-primary"
             name="self"
             value={self.self || ''}
-            onChange={handleChangeState}
+            onChange={handleChange}
             placeholder="자기소개"></textarea>
           <div className="label-text">이메일</div>
           <input
@@ -94,7 +95,7 @@ const MyPage = () => {
             className="input input-primary input-bordered my-2"
             name="email"
             value={email.email || ''}
-            onChange={handleChangeState}
+            onChange={handleChange}
             placeholder="이메일"
           />
           <div className="flex justify-end">
@@ -110,7 +111,7 @@ const MyPage = () => {
           </div>
 
           <div className="flex justify-center mt-10">
-            <a href="/blacklist/" className="text-xs link-hover">
+            <a href="/mypage/blacklist/" className="text-xs link-hover">
               차단 회원 관리
             </a>
           </div>

@@ -18,6 +18,7 @@ const Signup = () => {
     let reg_id = /^[a-z0-9_-]{4,20}$/;
 
     // 비밀번호 / 비밀번호 확인 일치
+    const [passwordCk2, setPwdCkText2] = useState(false);
     const OnPwCh = () => {
         const userPw = document.querySelector('#id_password');
         const userPwCh = document.querySelector('#id_password1');
@@ -27,6 +28,7 @@ const Signup = () => {
             if(userPw.value !== userPwCh.value) {
                 passInform.innerHTML = '비밀번호가 일치하지 않습니다.';
             } else {
+                setPwdCkText2(true);
                 passInform.innerHTML = ''
             }
         })
@@ -42,6 +44,8 @@ const Signup = () => {
     const [passwordCk, setPwdCkText] = useState("");
     const [nickname, setNickname] = useState("");
   
+
+
     const joinMember = async () => {
         const userPw = document.querySelector('#id_password');
         const PwVal = userPw.value;
@@ -49,35 +53,39 @@ const Signup = () => {
         const checked1 = policyCheckbox.checked === true ? true : false;
         const checked2 = privacyCheckbox.checked === true ? true : false;
 
-        if (reg_id.test(r_id.value) === true) {
-            if(Pwlen >= 8 ) {
-                if(checked1 && checked2) {
-                    if(user_id !== '' && password !== '' && nickname !== '') {
-                        await axios({
-                            method: "post",
-                            url: "/star/api/join",
-                            data: {
-                              user_id: user_id,
-                              password: password,
-                              nickname: nickname
-                            },
-                          })
-                            .then((res) => {
-                                navigate("/");
-                            })
-                            .catch((err) => {
-                              console.log(err);
-                                alert('중복된 아이디입니다.');
-                                setIdText("")
-                            });
+        if (reg_id.test(r_id.value) === true) { 
+            if(passwordCk2) {
+                if(Pwlen >= 8 ) {
+                    if(checked1 && checked2) {
+                        if(user_id !== '' && password !== '' && nickname !== '') {
+                            await axios({
+                                method: "post",
+                                url: "/star/api/join",
+                                data: {
+                                  user_id: user_id,
+                                  password: password,
+                                  nickname: nickname
+                                },
+                              })
+                                .then((res) => {
+                                    navigate("/");
+                                })
+                                .catch((err) => {
+                                  console.log(err);
+                                    alert('중복된 아이디입니다.');
+                                    setIdText("")
+                                });
+                        } else {
+                            alert("모든 기입란에 기입해주세요");
+                        }
                     } else {
-                        alert("모든 기입란에 기입해주세요");
+                        alert("모든 항목에 동의해주세요");
                     }
                 } else {
-                    alert("모든 항목에 동의해주세요");
+                    alert('비밀번호는 8자리 이상 입력해주세요');
                 }
             } else {
-                alert('비밀번호는 8자리 이상 입력해주세요');
+                alert("비밀번호가 일치하는지 확인해주세요.");
             }
         }   
         else {
