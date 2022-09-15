@@ -47,7 +47,11 @@ const CommentList = ({ commentList, memoDataList, path }) => {
                         댓글 수정
                       </div>
                       <div
-                        onClick={() => navigate("/my/delete-comment", { state: { seq: elem.seq } })}
+                        onClick={() =>
+                          navigate("/my/delete-comment", {
+                            state: { seq: elem.seq, storySeq: elem.story_seq },
+                          })
+                        }
                         className="btn btn-sm btn-error mx-1">
                         댓글 삭제
                       </div>

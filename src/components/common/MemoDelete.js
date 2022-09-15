@@ -8,7 +8,7 @@ const MemoDelete = () => {
   const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
   const location = useLocation();
-  const seq = location.state.seq;
+  const { seq, storySeq } = location.state;
   const isComment = location.pathname.includes("comment");
 
   const handleDelete = () => {
@@ -25,7 +25,11 @@ const MemoDelete = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      navigate("/my");
+      if (isComment) {
+        navigate(`/everydiary/detail/${storySeq}`);
+      } else {
+        navigate("/my");
+      }
     } catch (error) {
       console.error(error);
     }
