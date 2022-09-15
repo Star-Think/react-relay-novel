@@ -5,8 +5,10 @@ import BasicTemplate from "../../components/templates/BasicTemplate";
 import MyTitle from "../../components/common/MyTitle";
 import MemoList from "../../components/common/MemoList";
 import MemoPage from "../../components/common/MemoPage";
+import store from "../../store";
 
 const MyMain = () => {
+  const userId = store.getState().user.userInfo.user_id;
   const [data, setData] = useState([]);
   const [totalDataCount, setTotalDataCount] = useState(0);
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ const MyMain = () => {
     try {
       const response = await axios.post(
         "/star/api/diaryGet",
-        { page: pageParam, rows: row },
+        { page: pageParam, rows: row, view_id: userId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const memoData = response.data.data;

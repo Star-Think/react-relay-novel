@@ -50,7 +50,7 @@ const CommentEdit = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      navigate("/my");
+      navigate(`/everydiary/detail/${locationData.story_seq}`);
     } catch (error) {
       console.error(error);
     }
