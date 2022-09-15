@@ -116,7 +116,7 @@ const MyPage = () => {
           </div>
 
           <div className="flex justify-center mt-10">
-            <a href="/password_change/" className="mr-10 link-hover">
+            <a href="/mypage/changepassword" className="mr-10 link-hover">
               비밀번호 변경
             </a>
             <a href="/dropout/" className="ml-10 text-error link-hover">
