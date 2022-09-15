@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import MemoComment from "./MemoComment";
+import store from "../../store";
 
 const MemoDetail = ({ memo }) => {
+  const navigate = useNavigate();
   const [commentData, setCommentData] = useState([]);
   const token = localStorage.getItem("access_token");
+  const userId = store.getState().user.userInfo.user_id;
   const memoSeq = memo.seq;
   const getData = async () => {
     try {
@@ -59,14 +63,36 @@ const MemoDetail = ({ memo }) => {
               </div>
             </div>
 
-            <div className="flex justify-end">
-              <a href="#report" className="link-hover text-xs pt-5 text-error">
-                신고하기
-              </a>
-            </div>
+            {userId !== memo.user_id ? (
+              <div className="flex justify-end">
+                <a href="#report" className="link-hover text-xs pt-5 text-error">
+                  신고하기
+                </a>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
+
+      {userId === memo.user_id ? (
+        <div className="flex justify-center mt-5 mx-5">
+          <div className="flex justify-end xl:w-6/12 lg:w-6/12 md:w-8/12 w-full">
+            <div onClick={() => navigate("/my/create", { state: { data: memo } })} className="btn">
+              수정
+            </div>
+            <div
+              onClick={() => navigate("/my/delete", { state: { seq: memo.seq } })}
+              className="btn btn-error ml-2">
+              삭제
+            </div>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+
       {commentData.length > 0 ? <MemoComment data={commentData} /> : <></>}
     </>
   );
