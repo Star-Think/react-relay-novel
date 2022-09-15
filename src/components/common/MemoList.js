@@ -2,8 +2,10 @@ import React from "react";
 import MemoItem from "./MemoItem";
 import { useEffect, useState } from "react";
 import { timeChange } from "../../utils/CommonFun";
+import store from "../../store";
 
 const MemoList = ({ memoDataList, path }) => {
+  const userId = store.getState().user.userInfo.user_id;
   const [DateList, setDateList] = useState([]);
   let dateList = [];
 
@@ -38,8 +40,10 @@ const MemoList = ({ memoDataList, path }) => {
                 <p className="text-center">{date}</p>
                 <div className="container mx-auto flex flex-wrap justify-start">
                   {memoDataList.map((mData) => {
-                    if (mData.create_date === date) {
-                      return <MemoItem key={mData.seq} memo={mData} path={path} />;
+                    if (userId === mData.user_id) {
+                      if (mData.create_date === date) {
+                        return <MemoItem key={mData.seq} memo={mData} path={path} />;
+                      }
                     }
                   })}
                 </div>
