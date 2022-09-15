@@ -41,12 +41,16 @@ const CommentList = ({ commentList, memoDataList, path }) => {
                           })
                         }
                         className="btn"></div>
-                      <a className="btn btn-sm mx-1" href="/comment/13811/update/">
+                      <div
+                        onClick={() => navigate("/my/edit-comment", { state: { data: elem } })}
+                        className="btn btn-sm mx-1">
                         댓글 수정
-                      </a>
-                      <a className="btn btn-sm btn-error mx-1" href="/comment/13811/delete/">
+                      </div>
+                      <div
+                        onClick={() => navigate("/my/delete-comment", { state: { seq: elem.seq } })}
+                        className="btn btn-sm btn-error mx-1">
                         댓글 삭제
-                      </a>
+                      </div>
                     </div>
                   </>
                 )}
