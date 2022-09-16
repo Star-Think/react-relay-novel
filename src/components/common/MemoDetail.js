@@ -10,8 +10,8 @@ const MemoDetail = ({ memo }) => {
     try {
       const response = await axios.post(
         "/star/api/diaryDetail",
-        { seq: memoSeq },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { seq: memoSeq, user_id: memo.user_id }
+        // { headers: { Authorization: `Bearer ${token}` } }
       );
       const data = response.data.data.clist;
       setCommentData(data);
@@ -24,7 +24,7 @@ const MemoDetail = ({ memo }) => {
     if (memo.seq) {
       getData();
     }
-  }, [memo.seq]);
+  }, [memo]);
 
   return (
     <>
