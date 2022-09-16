@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../common/Header";
 import Footer from "../common/Footer";
 import axios from "axios";
 
 const MemoCreate = () => {
+  const location = useLocation();
+  const locationData = location.state && location.state.data ? location.state.data : "";
   const navigate = useNavigate();
   const token = localStorage.getItem("access_token");
+  const [isEdit, setIsEdit] = useState(false);
   const [state, setState] = useState({
     isPublic: "0",
     title: "",
@@ -18,10 +21,6 @@ const MemoCreate = () => {
     { key: "1", value: "비공개" },
   ];
   const { isPublic, title, content } = state;
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const handleChangeState = (e) => {
     const { value, name } = e.target;
@@ -40,22 +39,42 @@ const MemoCreate = () => {
     });
   };
 
-  async function setData() {
+  const setData = async () => {
     try {
-      const response = await axios.post(
-        "/star/api/diaryAdd",
-        {
-          title: state.title,
-          content: state.content,
-          type: isPublic,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const url = isEdit ? "/star/api/diaryUpdate" : "/star/api/diaryAdd";
+      const params = isEdit
+        ? {
+            seq: locationData.seq,
+            title: state.title,
+            content: state.content,
+            type: isPublic,
+            user_id: locationData.user_id,
+          }
+        : {
+            title: state.title,
+            content: state.content,
+            type: isPublic,
+          };
+      const response = await axios.post(url, params, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       navigate("/my");
     } catch (error) {
       console.error(error);
     }
-  }
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (locationData) {
+      setIsEdit(true);
+      setState({
+        isPublic: locationData.type,
+        title: locationData.title,
+        content: locationData.content,
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -73,8 +92,8 @@ const MemoCreate = () => {
                   className="select select-bordered select-primary w-full max-w-xs"
                   id="id_public"
                   onChange={handleChangeState}
-                  value={state.isPublic}>
-                  {options.map((item, index) => (
+                  value={isPublic}>
+                  {options.map((item) => (
                     <option key={item.key} value={item.key}>
                       {item.value}
                     </option>

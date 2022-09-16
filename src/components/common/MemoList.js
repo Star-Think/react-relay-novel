@@ -9,14 +9,6 @@ const MemoList = ({ memoDataList, path }) => {
 
   useEffect(() => {
     memoDataList.forEach((memoData) => {
-      /* 가데이터일 경우 create_date->date, idx->seq(from "../../utils/MemoData";) */
-      if (!memoData.create_date) {
-        memoData.create_date = memoData.date;
-        memoData.seq = memoData.idx;
-        memoData.view = memoData.views;
-      }
-      /* 가데이터일 경우 (from "../../utils/MemoData";) */
-
       if (!memoData.formatted_create_date) {
         memoData.formatted_create_date = timeChange(memoData.create_date);
         memoData.create_date = memoData.formatted_create_date;

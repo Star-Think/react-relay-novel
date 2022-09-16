@@ -20,7 +20,6 @@ const Header = () => {
     if (localStorage.getItem("user_info") !== null) {
       setUserInfo(JSON.parse(decrypt(localStorage.getItem("user_info"))));
     }
-    console.log(store.getState().user);
   }, []);
 
   window.onresize = () => {
@@ -28,7 +27,7 @@ const Header = () => {
       setMenuShow(true);
     }
   };
-
+ 
   const logout = () => {
     localStorage.clear();
     setUserInfo(null);
@@ -68,7 +67,7 @@ const Header = () => {
               </a>
             ) : (
               <div onClick={() => navigate("/mypage")} className="btn btn-ghost btn-sm rounded-btn">
-                {store.getState().user.userInfo.nickname}의 마이페이지
+                {store.getState().user.userInfo.user_id}의 마이페이지
               </div>
             )}
             {!store.getState().user.userInfo.nickname ? (
