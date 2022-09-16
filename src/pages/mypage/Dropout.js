@@ -15,7 +15,7 @@ const Dropout = () => {
         navigate(-1)
       }
 
-      const drop = async() => {
+      const dropOut = async() => {
         await axios ({
             method:"post",
             url: "/star/api/userDelete",
@@ -24,12 +24,15 @@ const Dropout = () => {
               }
         })
         .then((res) => {
-            alert("탈퇴되었습니다.")
+            console.log(res);
+            // alert("탈퇴되었습니다.")
             navigate("/");
         }).catch((error) =>{
             console.log(error);
+            navigate("/");
           })
       }
+      console.log(token);
     return (
         <div>
             <Header />
@@ -50,7 +53,7 @@ const Dropout = () => {
                 <form method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value="85z7QUcSFb05WGBafjTi26msXTcaxznGBpvuUSyTWXrgH5VOXmxOxRJSWVmDr20A"/>
                     <div className="btn mr-10" onClick={back}>취소</div>
-                    <button onClick={() => drop()} className="btn btn-error ml-10">탈퇴</button>
+                    <button onClick={() => dropOut()} className="btn btn-error ml-10">탈퇴</button>
                 </form>
             </div>
             <Footer/>
