@@ -109,7 +109,7 @@ const MyPage = () => {
           </div>
 
           <div className="flex justify-center mt-10">
-            <a href="/mypage/blacklist/" className="text-xs link-hover">
+            <a href="/mypage/blacklist" className="text-xs link-hover">
               차단 회원 관리
             </a>
           </div>
@@ -118,7 +118,7 @@ const MyPage = () => {
             <a href="/mypage/changepassword" className="mr-10 link-hover">
               비밀번호 변경
             </a>
-            <a href="/dropout/" className="ml-10 text-error link-hover">
+            <a href="/mypage/dropout" className="ml-10 text-error link-hover">
               회원 탈퇴
             </a>
           </div>
