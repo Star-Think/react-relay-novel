@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/common/Footer';
@@ -9,8 +10,25 @@ const Dropout = () => {
       };
 
       const navigate = useNavigate()
+      const token = localStorage.getItem("access_token");
       function back() {
         navigate(-1)
+      }
+
+      const drop = async() => {
+        await axios ({
+            method:"post",
+            url: "/star/api/userDelete",
+            headers: {
+                Authorization: `Bearer ${token}`,
+              }
+        })
+        .then((res) => {
+            alert("탈퇴되었습니다.")
+            navigate("/");
+        }).catch((error) =>{
+            console.log(error);
+          })
       }
     return (
         <div>
@@ -32,7 +50,7 @@ const Dropout = () => {
                 <form method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value="85z7QUcSFb05WGBafjTi26msXTcaxznGBpvuUSyTWXrgH5VOXmxOxRJSWVmDr20A"/>
                     <div className="btn mr-10" onClick={back}>취소</div>
-                    <button type="submit" className="btn btn-error ml-10">탈퇴</button>
+                    <button onClick={() => drop()} className="btn btn-error ml-10">탈퇴</button>
                 </form>
             </div>
             <Footer/>
