@@ -13,11 +13,8 @@ const MyPage = () => {
   };
 
   const [data, setData] = useState([]);
-  const [nickname, setNickname] = useState("");
-  const [self, setSelf] = useState("");
-  const [email, setEmail] = useState("");
   const token = localStorage.getItem("access_token");
-  console.log(token);
+  // console.log(token);
   const getData = async () => {
     try {
       const response = await axios({
@@ -33,15 +30,9 @@ const MyPage = () => {
       console.error(error);
     }
   };
-  useEffect(()=> {
-    getData();
-  }, [])
-
   useEffect(() => {
-    setNickname({nickname: data? data.nickname: ""})
-    setSelf({self: data? data.self: ""})
-    setEmail({email: data? data.email : ""})
-  }, [data]);
+    getData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,6 +40,8 @@ const MyPage = () => {
       ...data,
       [name]: value,
     });
+
+    console.log(data);
   };
 
   async function editMe() {
@@ -57,15 +50,15 @@ const MyPage = () => {
       const params = {
         nickname: data.nickname,
         self: data.self,
-        email: data.email
-      }
-        const response = await axios.post(url, params, {
+        email: data.email,
+      };
+      const response = await axios.post(url, params, {
         headers: { Authorization: `Bearer ${token}` },
       });
     } catch (error) {
       console.error(error);
     }
-}
+  }
   return (
     <div>
       <Header />
@@ -77,14 +70,14 @@ const MyPage = () => {
             onChange={handleChange}
             className="input input-primary input-bordered my-2"
             name="nickname"
-            value={nickname.nickname || ''}
+            value={data.nickname || ""}
           />
           <h2>자기소개</h2>
           <textarea
             style={width100}
             className="textarea h-36 textarea-bordered textarea-primary"
             name="self"
-            value={self.self || ''}
+            value={data.self || ""}
             onChange={handleChange}
             placeholder="자기소개"></textarea>
           <div className="label-text">이메일</div>
@@ -92,7 +85,7 @@ const MyPage = () => {
             style={width100}
             className="input input-primary input-bordered my-2"
             name="email"
-            value={email.email || ''}
+            value={data.email || ""}
             onChange={handleChange}
             placeholder="이메일"
           />
