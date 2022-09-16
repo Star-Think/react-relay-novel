@@ -30,8 +30,6 @@ const MyDetail = () => {
             <>
               <MemoDetail memo={memo} />
               <CommentCreate />
-              <MemoReprotModal reportId={"report"} content={"일기"} />
-              <MemoReprotModal reportId={"report2"} content={"댓글"} />
             </>
           );
         }}

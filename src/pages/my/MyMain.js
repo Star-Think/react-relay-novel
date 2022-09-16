@@ -8,11 +8,18 @@ import MemoPage from "../../components/common/MemoPage";
 import store from "../../store";
 
 const MyMain = () => {
-  const userId = store.getState().user.userInfo.user_id;
   const [data, setData] = useState([]);
   const [totalDataCount, setTotalDataCount] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
+  const viewId =
+    location.state && location.state.viewId
+      ? location.state.viewId
+      : store.getState().user.userInfo.user_id;
+  const nickName =
+    location.state && location.state.nickName
+      ? location.state.nickName
+      : store.getState().user.userInfo.nickname;
   const token = localStorage.getItem("access_token");
   const page = location.state !== null ? location.state.page : 1;
   const pageParam = parseInt(page) ? parseInt(page) : 1;
@@ -22,7 +29,7 @@ const MyMain = () => {
     try {
       const response = await axios.post(
         "/star/api/diaryGet",
-        { page: pageParam, rows: row, view_id: userId },
+        { page: pageParam, rows: row, view_id: viewId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const memoData = response.data.data;
@@ -47,7 +54,7 @@ const MyMain = () => {
         Content={() => {
           return (
             <>
-              <MyTitle memoDataList={data} />
+              <MyTitle memoDataList={data} viewId={viewId} nickName={nickName} />
               <MemoList memoDataList={data} path={"/my"} />
               <MemoPage memoDataCount={totalDataCount} path={"/my"} row={row} />
             </>

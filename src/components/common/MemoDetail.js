@@ -42,9 +42,15 @@ const MemoDetail = ({ memo }) => {
             <h2 className="card-title text-center mb-20">{memo.title}</h2>
             <div className="flex justify-between">
               <div>
-                <a href="/diary/ipurpleyou/" className="link-hover link-secondary">
+                <div
+                  onClick={() =>
+                    navigate(`/my/${memo.user_id}`, {
+                      state: { viewId: memo.user_id, nickName: memo.nickname },
+                    })
+                  }
+                  className="link-hover link-secondary">
                   {memo.nickname}
-                </a>
+                </div>
               </div>
               <div>
                 <p className="text-sm text-gray-500"> {memo.create_date}</p>

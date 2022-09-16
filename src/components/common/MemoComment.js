@@ -1,7 +1,9 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { timeChange } from "../../utils/CommonFun";
 
 const MemoComment = ({ data }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="flex justify-center mt-10">
@@ -12,9 +14,15 @@ const MemoComment = ({ data }) => {
                 <div className="w-4/6">{comment.content}</div>
                 <div className="text-right">
                   <div>
-                    <a href="/diary/june100322/" className="link-hover link-secondary">
+                    <div
+                      onClick={() =>
+                        navigate(`/my/${comment.user_id}`, {
+                          state: { viewId: comment.user_id, nickName: comment.nickname },
+                        })
+                      }
+                      className="link-hover link-secondary">
                       {comment.nickname}
-                    </a>
+                    </div>
                     <p className="text-xs text-gray-500 mt-2">{timeChange(comment.create_date)}</p>
                   </div>
 

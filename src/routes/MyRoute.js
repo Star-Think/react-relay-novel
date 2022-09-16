@@ -10,7 +10,7 @@ import CommentEdit from "../components/common/CommentEdit";
 const MyRoute = () => {
   return (
     <Routes>
-      <Route exact path="/" element={<MyMain />} />
+      <Route exact path="/*" element={<MyMain />} />
       <Route exact path="/create" element={<MemoCreate />} />
       <Route exact path="/received-comment" element={<MyComment />} />
       <Route exact path="/comment" element={<MyComment />} />
