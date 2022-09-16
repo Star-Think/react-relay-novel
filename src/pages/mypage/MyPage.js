@@ -17,7 +17,7 @@ const MyPage = () => {
   const [self, setSelf] = useState("");
   const [email, setEmail] = useState("");
   const token = localStorage.getItem("access_token");
-
+  console.log(token);
   const getData = async () => {
     try {
       const response = await axios({
