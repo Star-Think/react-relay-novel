@@ -13,6 +13,7 @@ import MyRoute from "./routes/MyRoute";
 import Signup from "./pages/signup/Signup";
 import EveryMain from "./pages/every/EveryMain";
 import MyPage from "./pages/mypage/MyPage";
+import EveryDetail from "./pages/every/EveryDetail";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
         <Route exact path="/my/*" element={<MyRoute />} />
         <Route exact path="/relay/*" element={<RelayRoute />} />
         <Route exact path="/everydiary/*" element={<EveryMain />} />
-        <Route path="/mypage" element={<MyPage />}/>
+        <Route exact path="/everydiary/detail/:idx" element={<EveryDetail />} />
+        <Route path="/mypage" element={<MyPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin/*" element={<AdminRoute />} />
