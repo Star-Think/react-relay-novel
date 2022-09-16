@@ -63,7 +63,7 @@ const MyPage = () => {
     <div>
       <Header />
       <div className="flex justify-center mt-20" style={marginTop}>
-        <form className="xl:w-2/12 lg:w-4/12 md:w-6/12 sm:w-8/12 w-10/12">
+        <div className="xl:w-2/12 lg:w-4/12 md:w-6/12 sm:w-8/12 w-10/12">
           <div className="label-text">닉네임</div>
           <input
             style={width100}
@@ -115,7 +115,7 @@ const MyPage = () => {
               회원 탈퇴
             </a>
           </div>
-        </form>
+        </div>
       </div>
       <Footer />
     </div>

@@ -1,8 +1,13 @@
 import axios from 'axios';
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/common/Footer';
 import Header from '../../components/common/Header';
+import { decrypt } from '../../utils/CryptoJsMake';
+import store from "../../store";
+import { ADD_USERINFO } from "../../actions/ActionTypes";
 
 const Dropout = () => {
     const marginTop = {
@@ -10,10 +15,18 @@ const Dropout = () => {
       };
 
       const navigate = useNavigate()
+      const [userInfo, setUserInfo] = useState();
+      
       const token = localStorage.getItem("access_token");
       function back() {
         navigate(-1)
       }
+
+      useEffect(() => {
+        if (localStorage.getItem("user_info") !== null) {
+          setUserInfo(JSON.parse(decrypt(localStorage.getItem("user_info"))));
+        }
+      }, []);
 
       const dropOut = async() => {
         await axios ({
@@ -24,8 +37,13 @@ const Dropout = () => {
               }
         })
         .then((res) => {
-            console.log(res);
-            // alert("탈퇴되었습니다.")
+            localStorage.clear();
+            setUserInfo(null);
+            store.dispatch({
+              type: ADD_USERINFO,
+              data: {},
+            });
+            alert("탈퇴되었습니다.")
             navigate("/");
         }).catch((error) =>{
             console.log(error);
@@ -50,11 +68,11 @@ const Dropout = () => {
                         정말 탈퇴하시겠습니까?
                     </div>
                 <div className="flex justify-center">
-                <form method="post">
+                <div method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value="85z7QUcSFb05WGBafjTi26msXTcaxznGBpvuUSyTWXrgH5VOXmxOxRJSWVmDr20A"/>
                     <div className="btn mr-10" onClick={back}>취소</div>
                     <button onClick={() => dropOut()} className="btn btn-error ml-10">탈퇴</button>
-                </form>
+                </div>
             </div>
             <Footer/>
         </div>
