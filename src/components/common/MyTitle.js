@@ -34,9 +34,12 @@ const MyTitle = ({ memoDataList }) => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const commentList = response.data.data.list;
-      navigate(`/my/${type === "received" ? "received-comment" : "comment"}`, {
-        state: { commentList: commentList, memoDataList: memoDataList },
-      });
+      console.log("response", response);
+      if (response.data.success) {
+        navigate(`/my/${type === "received" ? "received-comment" : "comment"}`, {
+          state: { commentList: commentList, memoDataList: memoDataList },
+        });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -100,7 +103,6 @@ const MyTitle = ({ memoDataList }) => {
             <div
               onClick={() => {
                 handleClick("received");
-                navigate("/my/receive-comment");
               }}
               className="btn btn-warning btn-xs sm:btn-sm md:btn-md lg:btn-md mx-2">
               <i className="fa-solid fa-comment"></i>&nbsp;내가 받은 댓글
@@ -108,7 +110,6 @@ const MyTitle = ({ memoDataList }) => {
             <div
               onClick={() => {
                 handleClick("");
-                navigate("/my/comment");
               }}
               className="btn btn-info btn-xs sm:btn-sm md:btn-md lg:btn-md">
               <i className="fa-solid fa-hand-holding-heart"></i>&nbsp;내가 쓴 댓글

@@ -35,13 +35,6 @@ const CommentList = ({ commentList, memoDataList, path }) => {
                   <>
                     <div className="flex justify-end mt-10">
                       <div
-                        onClick={() =>
-                          navigate(`${path}/detail/${elem.story_seq}`, {
-                            state: { data: memoData },
-                          })
-                        }
-                        className="btn"></div>
-                      <div
                         onClick={() => navigate("/my/edit-comment", { state: { data: elem } })}
                         className="btn btn-sm mx-1">
                         댓글 수정
