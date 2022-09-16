@@ -1,6 +1,33 @@
+import axios from "axios";
 import React from "react";
+import { useRef } from "react";
 
-const CommentCreate = () => {
+const CommentCreate = ({ memo }) => {
+  const comment = useRef(null);
+
+  const createComment = async (data) => {
+    if (comment.current.value.trim().length === 0) {
+      return alert("댓글을 입력하세요");
+    }
+    comment.current.value = "";
+    const token = localStorage.getItem("access_token");
+
+    const res = await axios.post(
+      "/star/api/commentAdd",
+      {
+        story_seq: memo.seq,
+        content: data,
+        type: 0,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (res.data.success) {
+      window.location.reload();
+      return alert("댓글 작성 완료");
+    }
+  };
+
   return (
     <div className="flex justify-center mt-5 mb-20 mx-5">
       <form
@@ -9,6 +36,7 @@ const CommentCreate = () => {
         className="xl:w-6/12 lg:w-6/12 md:w-8/12 w-full">
         <div className="flex justify-center">
           <textarea
+            ref={comment}
             name="content"
             required
             id="id_content"
@@ -24,7 +52,13 @@ const CommentCreate = () => {
             <option value="public">공개</option>
             <option value="private">비공개</option>
           </select>
-          <button type="submit" className="btn btn-primary ml-2">
+          <button
+            type="submit"
+            className="btn btn-primary ml-2"
+            onClick={(e) => {
+              e.preventDefault();
+              createComment(comment.current.value);
+            }}>
             저장
           </button>
         </div>
