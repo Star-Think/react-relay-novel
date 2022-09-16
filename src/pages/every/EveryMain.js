@@ -17,7 +17,6 @@ const EveryMain = () => {
   }, [page]);
 
   async function getData() {
-    const token = localStorage.getItem("access_token");
     try {
       const response = await axios.post("/star/api/diaryGet", {
         page: page,
@@ -53,8 +52,8 @@ const EveryMain = () => {
           return (
             <>
               <MemoTitle title={"모두의 일기"} />
-              <MemoList memoDataList={memoDataList} />
-              <MemoPage memoDataCount={memoDataList.length} />
+              <MemoList memoDataList={memoDataList} path={"/everydiary"} />
+              <MemoPage memoDataCount={memoDataList.length} path={"/everydiary"} />
             </>
           );
         }}

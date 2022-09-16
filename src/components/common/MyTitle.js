@@ -82,7 +82,7 @@ const MyTitle = ({ memoDataList }) => {
             <div
               onClick={() => {
                 handleClick("received");
-                navigate("/my/receive-comment");
+                navigate("/my/received-comment");
               }}
               className="btn btn-warning btn-xs sm:btn-sm md:btn-md lg:btn-md mx-2">
               <i className="fa-solid fa-comment"></i>&nbsp;내가 받은 댓글
