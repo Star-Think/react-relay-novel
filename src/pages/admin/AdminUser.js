@@ -7,6 +7,7 @@ import AdminReportPopup from "../../components/admin/AdminReportPopup";
 import AdminTop from "../../components/admin/AdminTop";
 import Footer from "../../components/common/Footer";
 import Header from "../../components/common/Header";
+import Loading from "../../components/common/Loading";
 import Pagination from "../../components/common/Pagination";
 import { timeChange } from "../../utils/CommonFun";
 
@@ -17,8 +18,19 @@ const AdminUser = () => {
   const [total, setTotal] = useState(0);
   const [dataList, setDataList] = useState([]);
   const [select, setSelect] = useState("");
+  const [loading, setLoading] = useState(null);
+
+  const lockScroll = React.useCallback(() => {
+    document.body.style.height = "100%";
+  }, []);
+
+  const unlockScroll = React.useCallback(() => {
+    document.body.style.height = "";
+  }, []);
 
   useEffect(() => {
+    lockScroll();
+    setLoading(true);
     getData();
   }, [page, select]);
 
@@ -34,11 +46,20 @@ const AdminUser = () => {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
-    }).then((res) => {
-      setTotal(res.data.data.count);
-      setDataList(res.data.data.list);
-      window.scrollTo(0, 0);
-    });
+    })
+      .then((res) => {
+        setTotal(res.data.data.count);
+        setDataList(res.data.data.list);
+        window.scrollTo(0, 0);
+        setTimeout(() => {
+          unlockScroll();
+          setLoading(false);
+        }, 1500);
+      })
+      .catch(() => {
+        unlockScroll();
+        setLoading(false);
+      });
   };
 
   return (
@@ -75,7 +96,7 @@ const AdminUser = () => {
           />
         );
       })}
-
+      {loading ? <Loading /> : null}
       <Footer />
     </>
   );

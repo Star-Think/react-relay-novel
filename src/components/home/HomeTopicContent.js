@@ -17,11 +17,6 @@ const HomeTopicContent = () => {
           <h1 className="xl:text-4xl lg:text-4xl md:text-3xl sm:text-2xl xs:text-2xl text-lg text-accent text-center bg-title">
             세상에서 가장 재미있는 일기쓰기
           </h1>
-          <div className="text-center mt-10">
-            <a href="/topic/" className="btn btn-primary btn-lg">
-              재미있는 일기 주제 살펴보기
-            </a>
-          </div>
         </div>
       </div>
     </>

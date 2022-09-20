@@ -20,7 +20,16 @@ const AdminDiary = () => {
   const [select, setSelect] = useState("");
   const [loading, setLoading] = useState(null);
 
+  const lockScroll = React.useCallback(() => {
+    document.body.style.height = "100%";
+  }, []);
+
+  const unlockScroll = React.useCallback(() => {
+    document.body.style.height = "";
+  }, []);
+
   useEffect(() => {
+    lockScroll();
     setLoading(true);
     getData();
   }, [page, select]);
@@ -42,9 +51,13 @@ const AdminDiary = () => {
         setTotal(res.data.data.count);
         setDataList(res.data.data.list);
         window.scrollTo(0, 0);
-        setLoading(false);
+        setTimeout(() => {
+          unlockScroll();
+          setLoading(false);
+        }, 1500);
       })
       .catch(() => {
+        unlockScroll();
         setLoading(false);
       });
   };
@@ -83,6 +96,7 @@ const AdminDiary = () => {
           />
         );
       })}
+      {loading ? <Loading /> : null}
 
       <Footer />
     </>

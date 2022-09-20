@@ -18,7 +18,6 @@ const Home = () => {
             <HomeTopicContent />
             <HomeUsesContent />
             <HomeExContent />
-            <HomeVideoContent />
           </>
         );
       }}

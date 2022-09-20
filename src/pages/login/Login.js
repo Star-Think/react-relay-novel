@@ -2,11 +2,12 @@ import Header from "../../components/common/Header";
 import Footer from "../../components/common/Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import InputBox from "../../components/common/InputBox";
 import { encrypt } from "../../utils/CryptoJsMake";
 import store from "../../store";
 import { ADD_USERINFO } from "../../actions/ActionTypes";
+import Loading from "../../components/common/Loading";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,8 +16,19 @@ function Login() {
   const pwdRef = useRef();
   const [idText, setIdText] = useState("");
   const [pwdText, setPwdText] = useState("");
+  const [loading, setLoading] = useState(null);
+
+  const lockScroll = React.useCallback(() => {
+    document.body.style.height = "100%";
+  }, []);
+
+  const unlockScroll = React.useCallback(() => {
+    document.body.style.height = "";
+  }, []);
 
   const postLogin = async () => {
+    lockScroll();
+    setLoading(true);
     await axios({
       method: "post",
       url: "/star/api/login",
@@ -39,9 +51,15 @@ function Login() {
             role: data.role,
           },
         });
-        navigate("/");
+        setTimeout(() => {
+          unlockScroll();
+          setLoading(false);
+          navigate("/");
+        }, 1500);
       })
       .catch((err) => {
+        unlockScroll();
+        setLoading(false);
         console.log(err);
         alert("아이디 또는 비밀번호를 확인하세요");
       });
@@ -90,6 +108,7 @@ function Login() {
         <div className="mx-5">아이디 찾기</div>
         <div className="mx-5">비밀번호 찾기</div>
       </div>
+      {loading ? <Loading /> : null}
       <Footer />
     </>
   );

@@ -27,7 +27,7 @@ const Header = () => {
       setMenuShow(true);
     }
   };
- 
+
   const logout = () => {
     localStorage.clear();
     setUserInfo(null);
@@ -42,9 +42,9 @@ const Header = () => {
     <>
       <div className="navbar mb-0 shadow-lg bg-neutral text-neutral-content menu-fixed">
         <div className="flex-none px-2 mx-2">
-          <a href="/" className="text-2xl font-bold">
+          <div onClick={() => navigate("/")} className=" btn text-2xl font-bold">
             오늘의 일기장
-          </a>
+          </div>
         </div>
 
         <div className="flex-1 px-2 mx-2 navbar-end">
@@ -52,28 +52,24 @@ const Header = () => {
             <div onClick={() => navigate("/my")} className="btn btn-ghost btn-sm rounded-btn">
               내 일기장
             </div>
-            <a href="/everydiary/" className="btn btn-ghost btn-sm rounded-btn">
+            <div
+              onClick={() => navigate("/everydiary")}
+              className="btn btn-ghost btn-sm rounded-btn">
               모두의 일기장
-            </a>
-            <div onClick={() => navigate("/relay")} className="btn btn-ghost btn-sm rounded-btn">
-              릴레이 소설
             </div>
-            {/* <a href="/signup/" className="btn btn-ghost btn-sm rounded-btn">
-              회원가입
-            </a> */}
             {!store.getState().user.userInfo.nickname ? (
-              <a href="/signup/" className="btn btn-ghost btn-sm rounded-btn">
+              <div onClick={() => navigate("/signup")} className="btn btn-ghost btn-sm rounded-btn">
                 회원가입
-              </a>
+              </div>
             ) : (
               <div onClick={() => navigate("/mypage")} className="btn btn-ghost btn-sm rounded-btn">
                 {store.getState().user.userInfo.user_id}의 마이페이지
               </div>
             )}
             {!store.getState().user.userInfo.nickname ? (
-              <a href="/login/" className="btn btn-ghost btn-sm rounded-btn">
+              <div onClick={() => navigate("/login")} className="btn btn-ghost btn-sm rounded-btn">
                 로그인
-              </a>
+              </div>
             ) : (
               <div onClick={() => logout()} className="btn btn-ghost btn-sm rounded-btn">
                 로그아웃
@@ -108,32 +104,40 @@ const Header = () => {
         id="burgerMenu"
         className={`flex justify-end z-10 ${menuShow ? "hidden" : ""} sub-menu-fixed`}>
         <ul className="menu bg-neutral text-neutral-content w-screen">
-          <a href="/topic/" className="btn btn-ghost">
-            재미있는 일기 주제
-          </a>
-
-          <a href="/mydiary/" className="btn btn-ghost">
+          <div onClick={() => navigate("/my")} className="btn btn-ghost">
             내 일기장
-          </a>
-          <a href="/classroom/" className="btn btn-ghost">
-            우리반 일기장
-          </a>
-          <a href="/everydiary/" className="btn btn-ghost">
-            모두의 일기장
-          </a>
-          <a href="/login/" className="btn btn-ghost">
-            마이페이지
-          </a>
-          <a href="/login/" className="btn btn-ghost">
-            로그아웃
-          </a>
+          </div>
 
-          <a href="/signup/" className="btn btn-ghost">
-            회원가입
-          </a>
-          <a href="/login/" className="btn btn-ghost">
-            로그인
-          </a>
+          <div onClick={() => navigate("/everydiary")} className="btn btn-ghost">
+            모두의 일기장
+          </div>
+
+          {!store.getState().user.userInfo.nickname ? (
+            <div onClick={() => navigate("/signup")} className="btn btn-ghost">
+              회원가입
+            </div>
+          ) : (
+            <div onClick={() => navigate("/mypage")} className="btn btn-ghost">
+              {store.getState().user.userInfo.user_id}의 마이페이지
+            </div>
+          )}
+          {!store.getState().user.userInfo.nickname ? (
+            <div onClick={() => navigate("/login")} className="btn btn-ghost">
+              로그인
+            </div>
+          ) : (
+            <div onClick={() => logout()} className="btn btn-ghost">
+              로그아웃
+            </div>
+          )}
+
+          {store.getState().user.userInfo.role === "ROLE_ADMIN" ? (
+            <div
+              onClick={() => navigate("/admin/diary")}
+              className="btn btn-ghost btn-sm rounded-btn">
+              관리자
+            </div>
+          ) : null}
         </ul>
       </div>
     </>

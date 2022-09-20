@@ -94,3 +94,12 @@ textarea {
 
   z-index: 1000;
 }
+html {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

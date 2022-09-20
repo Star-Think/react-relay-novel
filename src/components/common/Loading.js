@@ -9,8 +9,14 @@ function Loading() {
         backgroundColor: "rgba(0,0,0,0.6)",
         alignItems: "center",
         justifyContent: "center",
+        width: "100%",
+        height: "100%",
+        position: "absolute",
+        zIndex: "999",
+        top: "0px",
+        left: "0px",
       }}>
-      <div class="contentWrap">
+      <div className="contentWrap">
         <div
           style={{
             position: "fixed",
@@ -18,7 +24,14 @@ function Loading() {
             left: "50%",
             transform: "translate(-50%, -50%)",
           }}>
-          <PacmanLoader color="rgba(214, 54, 54, 1)" />
+          <PacmanLoader
+            color="rgba(214, 54, 54, 1)"
+            cssOverride={{
+              height: "100%",
+              position: "absolute",
+            }}
+            speedMultiplier={3}
+          />
         </div>
       </div>
     </div>
