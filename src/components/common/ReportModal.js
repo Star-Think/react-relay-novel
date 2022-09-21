@@ -30,7 +30,7 @@ const ReportModal = ({ modalType, blockId }) => {
           pContent:
             "부적절한 회원인가요? 의견을 주시면 꼼꼼하게 검토하겠습니다 처리 결과는 별도 안내드리지 않습니다.",
           btnText: "신고",
-          url: "star/api/reportAdd",
+          url: "/star/api/reportAdd",
         });
         break;
       case "block":
@@ -63,7 +63,7 @@ const ReportModal = ({ modalType, blockId }) => {
     modalWrap.classList.remove("modal-open");
     setContent({
       ...content,
-      reportContent: "",
+      param: { content: "", user_id: blockId },
     });
   };
 
