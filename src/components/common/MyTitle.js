@@ -110,16 +110,12 @@ const MyTitle = ({ memoDataList }) => {
     <div className="container mx-auto w-full p-5" style={{ marginTop: "100px" }}>
       <div className="card shadow-lg w-full h-full break-all">
         <div className="card-body bg-primary h-72 xl:p-20 lg:p-20 sm:p-20 p-10">
-          {userId !== locationViewId && (isComment || (!isComment && email)) ? (
-            <></>
-          ) : (
-            <>
-              <div className="flex justify-end">
-                <div onClick={() => navigate("/mypage")} className="text-error link link-hover">
-                  비밀번호 분실에 대비해서 이메일을 입력해주세요.
-                </div>
+          {userId === locationViewId && !isComment && !email && (
+            <div className="flex justify-end">
+              <div onClick={() => navigate("/mypage")} className="text-error link link-hover">
+                비밀번호 분실에 대비해서 이메일을 입력해주세요.
               </div>
-            </>
+            </div>
           )}
           <h2 className="card-title">{locationNickName}의 일기장</h2>
         </div>
