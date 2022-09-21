@@ -18,6 +18,7 @@ const MyTitle = ({ memoDataList }) => {
   const row = 12;
 
   const [email, setEmail] = useState("");
+  const [self, setSelf] = useState("");
 
   const locationViewId = location.state && location.state.viewId ? location.state.viewId : userId;
   const locationNickName =
@@ -68,6 +69,7 @@ const MyTitle = ({ memoDataList }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEmail(response.data.data.email);
+      setSelf(response.data.data.self);
     } catch (error) {
       console.error(error);
     }
@@ -119,6 +121,7 @@ const MyTitle = ({ memoDataList }) => {
             </div>
           )}
           <h2 className="card-title">{locationNickName}의 일기장</h2>
+          {self && <p>{self}</p>}
         </div>
       </div>
       {userId !== locationViewId && !isComment && (
