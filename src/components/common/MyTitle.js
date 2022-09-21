@@ -47,7 +47,7 @@ const MyTitle = ({ memoDataList }) => {
             state: { commentList: commentList, memoDataList: memoDataList },
           });
         } else {
-          navigate(`/my/${locationViewId}/comment`, {
+          navigate(`/my/comment/${locationViewId}`, {
             state: {
               commentList: commentList,
               memoDataList: memoDataList,
@@ -148,7 +148,6 @@ const MyTitle = ({ memoDataList }) => {
                 onClick={() => {
                   handleClick("", false);
                 }}
-                href="/comment/dolphin31/"
                 className="btn btn-xs sm:btn-sm md:btn-md lg:btn-md btn-info">
                 <i className="fa-solid fa-comment"></i>&nbsp;{locationNickName}의 댓글
               </div>

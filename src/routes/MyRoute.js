@@ -14,7 +14,7 @@ const MyRoute = () => {
       <Route exact path="/*" element={<MyMain />} />
       <Route exact path="/create" element={<MemoCreate />} />
       <Route exact path="/received-comment" element={<MyComment />} />
-      <Route exact path="/comment" element={<MyComment />} />
+      <Route exact path="/comment/*" element={<MyComment />} />
       <Route exact path="/detail/:idx" element={<MyDetail />} />
       <Route exact path="/delete" element={<MemoDelete />} />
       <Route exact path="/edit-comment" element={<CommentEdit />} />
