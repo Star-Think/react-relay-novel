@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import store from "../../store";
+import ReportModal from "./ReportModal";
 
 const MyTitle = ({ memoDataList }) => {
   const nickName = store.getState().user.userInfo.nickname;
@@ -21,6 +22,8 @@ const MyTitle = ({ memoDataList }) => {
   const locationViewId = location.state && location.state.viewId ? location.state.viewId : userId;
   const locationNickName =
     location.state && location.state.nickName ? location.state.nickName : nickName;
+
+  const [modalType, setModalType] = useState("");
 
   const handleClick = (type, isUser) => {
     setData(type, isUser);
@@ -61,7 +64,7 @@ const MyTitle = ({ memoDataList }) => {
 
   const getUserInfo = async (type) => {
     try {
-      let response = await axios.post("/star/api/myPageGet", "", {
+      const response = await axios.post("/star/api/myPageGet", "", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEmail(response.data.data.email);
@@ -70,9 +73,36 @@ const MyTitle = ({ memoDataList }) => {
     }
   };
 
+  const getBlockUserCheck = async () => {
+    try {
+      const response = await axios.post(
+        "/star/api/blockUserCheck",
+        { block_id: locationViewId },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const isBlockUser = response.data && response.data.message === "차단 회원" ? true : false;
+      if (isBlockUser) {
+        //navigate();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const openModal = (id) => {
+    const modalWrap = document.querySelector(".modal");
+    modalWrap.classList.add("modal-open");
+    setModalType(id);
+  };
+
   useEffect(() => {
     if (!isComment) {
       getUserInfo();
+      if (userId !== locationViewId) {
+        getBlockUserCheck();
+      }
     }
   }, []);
 
@@ -97,11 +127,19 @@ const MyTitle = ({ memoDataList }) => {
       {userId !== locationViewId && !isComment && (
         <>
           <div className="container mx-auto flex justify-end" style={{ marginTop: "10px" }}>
-            <div href="#report" className="text-xs text-error link link-hover">
-              회원 신고
+            <div
+              onClick={() => {
+                openModal("report");
+              }}
+              className="text-xs text-error link link-hover">
+              <div>회원 신고</div>
             </div>
             <span className="mx-2 text-xs">/</span>
-            <div href="#report2" className="text-xs text-error link link-hover">
+            <div
+              onClick={() => {
+                openModal("block");
+              }}
+              className="text-xs text-error link link-hover">
               회원 차단
             </div>
           </div>
@@ -119,6 +157,7 @@ const MyTitle = ({ memoDataList }) => {
               </div>
             </div>
           </div>
+          <ReportModal modalType={modalType} blockId={locationViewId} />
         </>
       )}
       {userId === locationViewId && !isComment && (
