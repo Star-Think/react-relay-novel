@@ -153,7 +153,7 @@ const MyTitle = ({ memoDataList }) => {
                 }}
                 href="/comment/dolphin31/"
                 className="btn btn-xs sm:btn-sm md:btn-md lg:btn-md btn-info">
-                <i className="fa-solid fa-comment"></i>&nbsp;{locationViewId}의 댓글
+                <i className="fa-solid fa-comment"></i>&nbsp;{locationNickName}의 댓글
               </div>
             </div>
           </div>
