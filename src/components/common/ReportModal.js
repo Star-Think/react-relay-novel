@@ -50,7 +50,7 @@ const ReportModal = ({ modalType, blockId }) => {
       const response = await axios.post(url, param, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (response.sucess) {
+      if (response.data.success) {
         closeModal();
       }
     } catch (error) {
