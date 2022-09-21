@@ -18,7 +18,7 @@ const ReportModal = ({ modalType, blockId }) => {
   const handleChangeState = (e) => {
     setContent({
       ...content,
-      reportContent: e.target.value,
+      param: { content: e.target.value, user_id: blockId },
     });
   };
 
@@ -27,22 +27,19 @@ const ReportModal = ({ modalType, blockId }) => {
       case "report":
         setContent({
           title: "신고하기",
-          content:
+          pContent:
             "부적절한 회원인가요? 의견을 주시면 꼼꼼하게 검토하겠습니다 처리 결과는 별도 안내드리지 않습니다.",
           btnText: "신고",
           url: "star/api/reportAdd",
-          param: { content: reportContent, user_id: blockId },
-          pContent: "",
         });
         break;
       case "block":
         setContent({
           title: "차단하기",
-          content: `'${blockId}'을(를) 차단하시겠습니까? 차단한 회원의 게시글과 댓글은 보이지 않습니다.`,
+          pContent: `'${blockId}'을(를) 차단하시겠습니까? 차단한 회원의 게시글과 댓글은 보이지 않습니다.`,
           btnText: "차단",
           url: "/star/api/blockUserAdd",
           param: { block_id: blockId },
-          pContent: "",
         });
         break;
     }
