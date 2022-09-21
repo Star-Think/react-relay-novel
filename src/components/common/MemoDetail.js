@@ -25,6 +25,7 @@ const MemoDetail = ({ memo }) => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (memo.seq) {
       getData();
     }
@@ -32,7 +33,7 @@ const MemoDetail = ({ memo }) => {
 
   return (
     <>
-      <div className="flex justify-center mt-5 mx-5">
+      <div className="flex justify-center mt-5 mx-5" style={{ marginTop: "100px" }}>
         <div className="xl:w-6/12 lg:w-6/12 md:w-8/12 w-full h-full card shadow-lg break-all min-h-screen">
           <div className="card-body bg-white lg:p-24">
             <div className="flex justify-between mb-10">
