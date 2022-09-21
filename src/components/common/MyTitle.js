@@ -84,7 +84,7 @@ const MyTitle = ({ memoDataList }) => {
       );
       const isBlockUser = response.data && response.data.message === "차단 회원" ? true : false;
       if (isBlockUser) {
-        //navigate();
+        navigate("/my/error", { state: { blockId: locationViewId } });
       }
     } catch (error) {
       console.error(error);

@@ -6,6 +6,7 @@ import MyComment from "../pages/my/MyComment";
 import MyDetail from "../pages/my/MyDetail";
 import MemoDelete from "../components/common/MemoDelete";
 import CommentEdit from "../components/common/CommentEdit";
+import ErrorPage from "../components/common/ErrorPage";
 
 const MyRoute = () => {
   return (
@@ -18,6 +19,7 @@ const MyRoute = () => {
       <Route exact path="/delete" element={<MemoDelete />} />
       <Route exact path="/edit-comment" element={<CommentEdit />} />
       <Route exact path="/delete-comment" element={<MemoDelete />} />
+      <Route exact path="/error" element={<ErrorPage />} />
     </Routes>
   );
 };
