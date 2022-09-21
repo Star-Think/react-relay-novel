@@ -49,7 +49,8 @@ const MemoDetail = ({ memo }) => {
                       state: { viewId: memo.user_id, nickName: memo.nickname },
                     })
                   }
-                  className="link-hover link-secondary">
+                  className="link-hover link-secondary"
+                  style={{ cursor: "pointer" }}>
                   {memo.nickname}
                 </div>
               </div>

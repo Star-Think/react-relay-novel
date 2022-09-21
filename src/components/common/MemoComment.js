@@ -20,7 +20,8 @@ const MemoComment = ({ data }) => {
                           state: { viewId: comment.user_id, nickName: comment.nickname },
                         })
                       }
-                      className="link-hover link-secondary">
+                      className="link-hover link-secondary"
+                      style={{ cursor: "pointer" }}>
                       {comment.nickname}
                     </div>
                     <p className="text-xs text-gray-500 mt-2">{timeChange(comment.create_date)}</p>
