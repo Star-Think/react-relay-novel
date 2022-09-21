@@ -4,7 +4,7 @@ import axios from "axios";
 import BasicTemplate from "../../components/templates/BasicTemplate";
 import MyTitle from "../../components/common/MyTitle";
 import MemoList from "../../components/common/MemoList";
-import MemoPage from "../../components/common/MemoPage";
+import Pagination from "../../components/common/Pagination";
 import store from "../../store";
 
 const MyMain = () => {
@@ -21,15 +21,14 @@ const MyMain = () => {
       ? location.state.nickName
       : store.getState().user.userInfo.nickname;
   const token = localStorage.getItem("access_token");
-  const page = location.state !== null ? location.state.page : 1;
-  const pageParam = parseInt(page) ? parseInt(page) : 1;
+  const [page, setPage] = useState(1);
   const row = 24;
 
   const getData = async () => {
     try {
       const response = await axios.post(
         "/star/api/diaryGet",
-        { page: pageParam, rows: row, view_id: viewId },
+        { page: page, rows: row, view_id: viewId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const memoData = response.data.data;
@@ -56,7 +55,9 @@ const MyMain = () => {
             <>
               <MyTitle memoDataList={data} viewId={viewId} nickName={nickName} />
               <MemoList memoDataList={data} path={"/my"} />
-              <MemoPage memoDataCount={totalDataCount} path={"/my"} row={row} />
+              {totalDataCount > 0 && (
+                <Pagination total={totalDataCount} rows={row} page={page} setPage={setPage} />
+              )}
             </>
           );
         }}

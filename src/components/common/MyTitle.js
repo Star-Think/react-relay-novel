@@ -98,6 +98,7 @@ const MyTitle = ({ memoDataList }) => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!isComment) {
       getUserInfo();
       if (userId !== locationViewId) {
