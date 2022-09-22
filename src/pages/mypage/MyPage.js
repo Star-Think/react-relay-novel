@@ -44,19 +44,48 @@ const MyPage = () => {
     console.log(data);
   };
 
+
+  // email
+  const [mailCk, setMailCk] = useState(false);
+  const handleChange2 = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+
+    const text = document.querySelector('#email');
+    const mailInform = document.querySelector('#mailCkMessage');
+    //eslint-disable-next-line
+    var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    mailInform.style.color = 'crimson';
+    if (regEmail.test(text.value) === true) {
+        mailInform.innerHTML = '';
+        setMailCk(true);
+    }else {
+        mailInform.innerHTML = '이메일 형식이 아닙니다.';
+        setMailCk(false);
+    }
+  };
+
   async function editMe() {
-    try {
-      const url = "/star/api/myPageUpdate";
-      const params = {
-        nickname: data.nickname,
-        self: data.self,
-        email: data.email,
-      };
-      const response = await axios.post(url, params, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-    } catch (error) {
-      console.error(error);
+    if(mailCk) {
+      try {
+        const url = "/star/api/myPageUpdate";
+        const params = {
+          nickname: data.nickname,
+          self: data.self,
+          email: data.email,
+        };
+        const response = await axios.post(url, params, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        alert("변경되었습니다.")
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      alert('이메일 형식을 확인해주세요')
     }
   }
   return (
@@ -86,9 +115,11 @@ const MyPage = () => {
             className="input input-primary input-bordered my-2"
             name="email"
             value={data.email || ""}
-            onChange={handleChange}
+            onChange={handleChange2}
             placeholder="이메일"
+            id="email"
           />
+           <span id='mailCkMessage' className='small_span'></span>
           <div className="flex justify-end">
             <button
               className="btn btn-primary btn-block"
