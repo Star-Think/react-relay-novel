@@ -65,9 +65,13 @@ const MyTitle = ({ memoDataList }) => {
 
   const getUserInfo = async (type) => {
     try {
-      const response = await axios.post("/star/api/myPageGet", "", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.post(
+        "/star/api/userNameGet",
+        { user_id: locationViewId },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setEmail(response.data.data.email);
       setSelf(response.data.data.self);
     } catch (error) {
