@@ -105,8 +105,12 @@ function Login() {
         <div>회원가입</div>
       </div>
       <div className="flex justify-center mt-10 link text-sm text-gray-500">
-        <div className="mx-5">아이디 찾기</div>
-        <div className="mx-5">비밀번호 찾기</div>
+        <div className="mx-5" onClick={() => navigate("/find/findId")}>
+          아이디 찾기
+        </div>
+        <div className="mx-5" onClick={() => navigate("/find/findPwd")}>
+          비밀번호 찾기
+        </div>
       </div>
       {loading ? <Loading /> : null}
       <Footer />
