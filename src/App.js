@@ -15,6 +15,7 @@ import EveryMain from "./pages/every/EveryMain";
 import MyPage from "./pages/mypage/MyPage";
 import EveryDetail from "./pages/every/EveryDetail";
 import MyPageRoute from "./routes/MyPageRoute";
+import FindRoute from "./routes/FindRoute";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin/*" element={<AdminRoute />} />
+        <Route path="/find/*" element={<FindRoute />} />
       </Routes>
     </>
   );
