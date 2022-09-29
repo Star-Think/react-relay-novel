@@ -1,23 +1,41 @@
 import axios from "axios";
 import React from "react";
-import { useRef } from "react";
+import { useState } from "react";
 
 const CommentCreate = ({ memo }) => {
-  const comment = useRef(null);
+  const [commentData, setCommentData] = useState({
+    comment: "",
+    hidden: 0,
+  });
 
-  const createComment = async (data) => {
-    if (comment.current.value.trim().length === 0) {
+  const handleChangeComment = (e) => {
+    setCommentData({ ...commentData, comment: e.target.value });
+  };
+
+  const handleChangeHidden = (e) => {
+    const hiddenName = e.target.value;
+
+    if (hiddenName === "private") {
+      setCommentData({ ...commentData, hidden: 1 });
+    } else {
+      setCommentData({ ...commentData, hidden: 0 });
+    }
+  };
+
+  const createComment = async (e) => {
+    e.preventDefault();
+
+    if (commentData.comment.trim().length === 0) {
       return alert("댓글을 입력하세요");
     }
-    comment.current.value = "";
     const token = localStorage.getItem("access_token");
 
     const res = await axios.post(
       "/star/api/commentAdd",
       {
         story_seq: memo.seq,
-        content: data,
-        type: 0,
+        content: commentData.comment,
+        type: commentData.hidden,
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -26,6 +44,8 @@ const CommentCreate = ({ memo }) => {
       window.location.reload();
       return alert("댓글 작성 완료");
     }
+
+    setCommentData({ ...commentData, comment: "", hidden: 0 });
   };
 
   return (
@@ -36,7 +56,7 @@ const CommentCreate = ({ memo }) => {
         className="xl:w-6/12 lg:w-6/12 md:w-8/12 w-full">
         <div className="flex justify-center">
           <textarea
-            ref={comment}
+            onChange={handleChangeComment}
             name="content"
             required
             id="id_content"
@@ -47,18 +67,13 @@ const CommentCreate = ({ memo }) => {
           <select
             name="public"
             required
+            onChange={handleChangeHidden}
             id="id_public"
             className="select select-bordered select-primary max-w-xs ml-2">
             <option value="public">공개</option>
             <option value="private">비공개</option>
           </select>
-          <button
-            type="submit"
-            className="btn btn-primary ml-2"
-            onClick={(e) => {
-              e.preventDefault();
-              createComment(comment.current.value);
-            }}>
+          <button type="submit" className="btn btn-primary ml-2" onClick={createComment}>
             저장
           </button>
         </div>

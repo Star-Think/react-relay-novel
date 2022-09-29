@@ -7,15 +7,15 @@ import store from "../../store";
 const MemoDetail = ({ memo }) => {
   const navigate = useNavigate();
   const [commentData, setCommentData] = useState([]);
+  const [userId, setUserId] = useState("");
   const token = localStorage.getItem("access_token");
-  const userId = store.getState().user.userInfo.user_id;
   const memoSeq = memo.seq;
   const getData = async () => {
     try {
       const response = await axios.post(
         "/star/api/diaryDetail",
-        { seq: memoSeq, user_id: memo.user_id }
-        // { headers: { Authorization: `Bearer ${token}` } }
+        { seq: memoSeq, user_id: memo.user_id },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       const data = response.data.data.clist;
       setCommentData(data);
@@ -28,6 +28,7 @@ const MemoDetail = ({ memo }) => {
     window.scrollTo(0, 0);
     if (memo.seq) {
       getData();
+      setUserId(store.getState().user.userInfo.user_id);
     }
   }, [memo]);
 

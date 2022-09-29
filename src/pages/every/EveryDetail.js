@@ -35,8 +35,8 @@ const EveryDetail = () => {
             <>
               <MemoDetail memo={memo} />
               <CommentCreate memo={memo} />
-              <MemoReprotModal reportId={"report"} content={"일기"} />
-              <MemoReprotModal reportId={"report2"} content={"댓글"} />
+              {/* <MemoReprotModal reportId={"report"} content={"일기"} />
+              <MemoReprotModal reportId={"report2"} content={"댓글"} memo={memo} /> */}
             </>
           );
         }}
