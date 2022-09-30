@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import BasicTemplate from "../../components/templates/BasicTemplate";
+import Header from "../../components/common/Header";
+import Footer from "../../components/common/Footer";
 import MyTitle from "../../components/common/MyTitle";
 import MemoList from "../../components/common/MemoList";
 import Pagination from "../../components/common/Pagination";
@@ -49,19 +50,13 @@ const MyMain = () => {
 
   return (
     <>
-      <BasicTemplate
-        Content={() => {
-          return (
-            <>
-              <MyTitle memoDataList={data} viewId={viewId} nickName={nickName} />
-              <MemoList memoDataList={data} path={"/my"} />
-              {totalDataCount > 0 && (
-                <Pagination total={totalDataCount} rows={row} page={page} setPage={setPage} />
-              )}
-            </>
-          );
-        }}
-      />
+      <Header />
+      <MyTitle memoDataList={data} viewId={viewId} nickName={nickName} />
+      <MemoList memoDataList={data} path={"/my"} />
+      {totalDataCount > 0 && (
+        <Pagination total={totalDataCount} rows={row} page={page} setPage={setPage} />
+      )}
+      <Footer />
     </>
   );
 };
