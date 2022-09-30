@@ -69,24 +69,30 @@ const MyPage = () => {
   };
 
   async function editMe() {
-    if(mailCk) {
-      try {
-        const url = "/star/api/myPageUpdate";
-        const params = {
-          nickname: data.nickname,
-          self: data.self,
-          email: data.email,
-        };
-        const response = await axios.post(url, params, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        alert("변경되었습니다.")
-      } catch (error) {
-        console.error(error);
+    if(window.confirm("수정하시겠습니까?")) {
+      if(mailCk) {
+        try {
+          const url = "/star/api/myPageUpdate";
+          const params = {
+            nickname: data.nickname,
+            self: data.self,
+            email: data.email,
+          };
+          const response = await axios.post(url, params, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          alert("변경되었습니다.")
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        alert('이메일 형식을 확인해주세요')
       }
     } else {
-      alert('이메일 형식을 확인해주세요')
+      alert("수정이 취소되었습니다.")
+      window.location.reload();
     }
+
   }
   return (
     <div>
@@ -124,7 +130,6 @@ const MyPage = () => {
             <button
               className="btn btn-primary btn-block"
               onClick={() => {
-                alert("변경하시겠습니까?");
                 editMe();
               }}
               type="submit">
