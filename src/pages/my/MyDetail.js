@@ -31,7 +31,7 @@ const MyDetail = () => {
     <>
       <Header />
       <MemoDetail memo={memo} />
-      <CommentCreate />
+      <CommentCreate memo={memo} />
       <Footer />
     </>
   );
