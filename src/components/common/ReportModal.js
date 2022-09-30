@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ReportModal = ({ modalType, blockId }) => {
+  const navigate = useNavigate();
   const token = localStorage.getItem("access_token");
 
   const [content, setContent] = useState({
@@ -52,6 +54,8 @@ const ReportModal = ({ modalType, blockId }) => {
       });
       if (response.data.success) {
         closeModal();
+        navigate("/my/error", { state: { blockId: blockId } });
+        return;
       }
     } catch (error) {
       console.error(error);
