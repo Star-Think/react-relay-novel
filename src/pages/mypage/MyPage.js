@@ -87,7 +87,7 @@ const MyPage = () => {
         }
       } else {
         alert('이메일 형식을 확인해주세요')
-      }
+      } 
     } else {
       alert("수정이 취소되었습니다.")
       window.location.reload();
