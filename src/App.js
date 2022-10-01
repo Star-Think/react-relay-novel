@@ -24,8 +24,8 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/my/*" element={<MyRoute />} />
         <Route exact path="/relay/*" element={<RelayRoute />} />
-        <Route exact path="/everydiary/*" element={<EveryMain />} />
-        <Route exact path="/everydiary/detail/:idx" element={<EveryDetail />} />
+        <Route exact path="/everydiary/:page" element={<EveryMain />} />
+        <Route exact path="/everydiary/:page/detail/:idx" element={<EveryDetail />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route exact path="/mypage/*" element={<MyPageRoute />} />
         <Route path="/login" element={<Login />} />

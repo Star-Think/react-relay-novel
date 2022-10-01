@@ -18,7 +18,9 @@ const CommentList = ({ commentList, memoDataList, path }) => {
             <div className={"card-body h-" + (receivedComment ? "36" : "48") + " bg-white"}>
               <div
                 onClick={() =>
-                  navigate(`/everydiary/detail/${elem.story_seq}`, { state: { data: memoData } })
+                  navigate(`/everydiary/page/detail/${elem.story_seq}`, {
+                    state: { data: memoData },
+                  })
                 }
                 style={{ cursor: "pointer" }}>
                 <div className="flex justify-between">

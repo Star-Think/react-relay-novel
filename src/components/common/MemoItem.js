@@ -4,11 +4,17 @@ const MemoItem = ({ memo, path }) => {
   const navigate = useNavigate();
   const isMyMemo = path === "/my";
 
+  console.log(`path는 ${path}이다`);
+
   return (
     <>
       <div className="lg:w-1/4 md:w-1/2 w-full p-5">
         <div
-          onClick={() => navigate(`${path}/detail/${memo.seq}`, { state: { data: memo } })}
+          onClick={() =>
+            isMyMemo
+              ? navigate(`${path}/detail/${memo.seq}`, { state: { data: memo } })
+              : navigate(`${path}/detail/${memo.seq}`, { state: { data: memo } })
+          }
           style={{ cursor: "pointer" }}>
           <div className="hover:shadow-2xl card shadow-lg w-full h-full break-all">
             <div className="card-body h-72 bg-white">

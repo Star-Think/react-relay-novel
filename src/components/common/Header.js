@@ -53,7 +53,7 @@ const Header = () => {
               내 일기장
             </div>
             <div
-              onClick={() => navigate("/everydiary")}
+              onClick={() => navigate("/everydiary/1")}
               className="btn btn-ghost btn-sm rounded-btn">
               모두의 일기장
             </div>
@@ -108,7 +108,7 @@ const Header = () => {
             내 일기장
           </div>
 
-          <div onClick={() => navigate("/everydiary")} className="btn btn-ghost">
+          <div onClick={() => navigate("/everydiary/1")} className="btn btn-ghost">
             모두의 일기장
           </div>
 

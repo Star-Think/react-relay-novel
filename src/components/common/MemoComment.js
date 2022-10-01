@@ -172,7 +172,14 @@ const MemoComment = ({ data }) => {
           })}
         </div>
       </div>
-      {modal && <MemoReprotModal reportId={"report2"} content={"댓글"} memo={reportComment} />}
+      {modal && (
+        <MemoReprotModal
+          reportId={"report2"}
+          content={"댓글"}
+          memo={reportComment}
+          setModal={setModal}
+        />
+      )}
     </>
   );
 };

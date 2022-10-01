@@ -38,7 +38,9 @@ const MemoDetail = ({ memo }) => {
         <div className="xl:w-6/12 lg:w-6/12 md:w-8/12 w-full h-full card shadow-lg break-all min-h-screen">
           <div className="card-body bg-white lg:p-24">
             <div className="flex justify-between mb-10">
-              <div className="badge badge-primary">{memo.type === 0 ? "모두 공개" : "비공개"}</div>
+              <div className="badge badge-primary">
+                {memo.type === "0" ? "모두 공개" : "비공개"}
+              </div>
             </div>
 
             <h2 className="card-title text-center mb-20">{memo.title}</h2>

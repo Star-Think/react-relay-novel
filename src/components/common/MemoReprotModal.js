@@ -3,31 +3,28 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const MemoReprotModal = ({ reportId, content, memo }) => {
+const MemoReprotModal = ({ reportId, content, memo, setModal }) => {
   const navigate = useNavigate();
   const [reportContent, setReportContent] = useState("");
 
   const handleChangeReportContent = (e) => {
     setReportContent(e.target.value);
-
-    console.log(memo);
   };
 
-  const handleClickReportButton = () => {
+  const handleClickReportButton = async () => {
     const token = localStorage.getItem("access_token");
-
-    const getData = async () => {
-      try {
-        const response = await axios.post(
-          "/star/api/diaryDetail",
-          { report_seq: reportId },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        const data = response.data.data.clist;
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    try {
+      await axios.post(
+        "/star/api/reportAdd",
+        { report_seq: memo.seq, content: reportContent, user: memo.nickname, type: memo.type },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      alert("신고 완료");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setModal(false);
+    }
   };
 
   return (
@@ -58,7 +55,11 @@ const MemoReprotModal = ({ reportId, content, memo }) => {
           <div onClick={() => navigate(-1)} className="btn btn-outline btn-error">
             취소
           </div>
-          <button type="submit" id="reportBtn" className="btn btn-error ml-2">
+          <button
+            type="submit"
+            id="reportBtn"
+            className="btn btn-error ml-2"
+            onClick={handleClickReportButton}>
             신고
           </button>
         </div>

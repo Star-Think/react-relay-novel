@@ -10,6 +10,7 @@ const EveryMain = () => {
   const [memoDataList, setMemoDataList] = useState([]);
   const location = useLocation();
   const page = location.state !== null ? location.state.page : 1;
+  const [totalPage, setTotalPage] = useState(0);
   const navigate = useNavigate();
   useEffect(() => {
     getData();
@@ -21,8 +22,12 @@ const EveryMain = () => {
       const response = await axios.post("/star/api/diaryGet", {
         page: page,
       });
-      console.log(response);
       const memoData = response.data.data.list;
+      setTotalPage(
+        response.data.data.count % 10 === 0
+          ? response.data.data.count / 10
+          : parseInt(response.data.data.count / 10) + 1
+      );
 
       memoData.sort((a, b) => {
         if (a.date > b.date) {
@@ -33,13 +38,8 @@ const EveryMain = () => {
         }
         return 0;
       });
-      const pageParam = parseInt(page) ? parseInt(page) : 1;
-      const row = 23;
 
-      const fIndex = (pageParam - 1) * (row + 1);
-      const eIndex = fIndex + row + 1;
-
-      setMemoDataList(memoData.slice(fIndex, eIndex));
+      setMemoDataList(memoData);
     } catch (error) {
       console.error(error);
     }
@@ -51,9 +51,13 @@ const EveryMain = () => {
         Content={() => {
           return (
             <>
-              <MemoTitle title={"모두의 일기"} />
-              <MemoList memoDataList={memoDataList} path={"/everydiary"} />
-              <MemoPage memoDataCount={memoDataList.length} path={"/everydiary"} />
+              {memoDataList && (
+                <>
+                  <MemoTitle title={"모두의 일기"} />
+                  <MemoList memoDataList={memoDataList} path={`/everydiary/${page}`} />
+                  <MemoPage memoDataCount={memoDataList.length} totalPage={totalPage} />
+                </>
+              )}
             </>
           );
         }}

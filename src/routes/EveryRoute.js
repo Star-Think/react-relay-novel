@@ -8,7 +8,7 @@ const EveryRoute = () => {
   return (
     <Routes>
       <Route exact path="/" element={<EveryMain />} />
-      <Route exact path="/detail/:idx" element={<EveryDetail />} />
+      <Route exact path="/:page/detail/:idx" element={<EveryDetail />} />
     </Routes>
   );
 };
