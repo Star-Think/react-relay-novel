@@ -20,7 +20,7 @@ const ReportModal = ({ modalType, blockId }) => {
   const handleChangeState = (e) => {
     setContent({
       ...content,
-      param: { content: e.target.value, user_id: blockId },
+      param: { content: e.target.value, report_id: blockId, type: "2" },
     });
   };
 
@@ -54,7 +54,9 @@ const ReportModal = ({ modalType, blockId }) => {
       });
       if (response.data.success) {
         closeModal();
-        navigate("/my/error", { state: { blockId: blockId } });
+        if (param.type !== "2") {
+          navigate("/my/error", { state: { blockId: blockId } });
+        }
         return;
       }
     } catch (error) {
