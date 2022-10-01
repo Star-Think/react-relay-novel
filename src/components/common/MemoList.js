@@ -18,7 +18,7 @@ const MemoList = ({ memoDataList, path }) => {
       }
     });
     setDateList(dateList);
-  }, []);
+  }, [memoDataList]);
 
   return (
     <>
