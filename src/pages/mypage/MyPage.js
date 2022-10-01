@@ -46,7 +46,7 @@ const MyPage = () => {
 
 
   // email
-  const [mailCk, setMailCk] = useState(false);
+  const [mailCk, setMailCk] = useState(true);
   const handleChange2 = (e) => {
     const { name, value } = e.target;
     setData({
