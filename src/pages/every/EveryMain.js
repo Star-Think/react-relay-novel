@@ -18,10 +18,16 @@ const EveryMain = () => {
   }, [page]);
 
   async function getData() {
+    const token = localStorage.getItem("access_token");
+
     try {
-      const response = await axios.post("/star/api/diaryGet", {
-        page: page,
-      });
+      const response = await axios.post(
+        "/star/api/diaryGet",
+        { page: page, rows: 10 },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      console.log(response);
       const memoData = response.data.data.list;
       setTotalPage(
         response.data.data.count % 10 === 0

@@ -25,6 +25,8 @@ const MyMain = () => {
   const [page, setPage] = useState(1);
   const row = 24;
 
+  console.log(viewId);
+
   const getData = async () => {
     try {
       const response = await axios.post(
