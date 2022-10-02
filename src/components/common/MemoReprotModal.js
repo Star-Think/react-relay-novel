@@ -16,7 +16,12 @@ const MemoReprotModal = ({ reportId, content, memo, setModal }) => {
     try {
       await axios.post(
         "/star/api/reportAdd",
-        { report_seq: memo.seq, content: reportContent, user: memo.nickname, type: memo.type },
+        {
+          report_seq: memo.seq,
+          content: reportContent,
+          user: memo.nickname,
+          type: content === "일기" ? 0 : 1,
+        },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert("신고 완료");
@@ -52,7 +57,7 @@ const MemoReprotModal = ({ reportId, content, memo, setModal }) => {
           required
           placeholder={`이 ${content}에 대한 의견을 적어주세요.`}></textarea>
         <div className="flex justify-end">
-          <div onClick={() => navigate(-1)} className="btn btn-outline btn-error">
+          <div onClick={() => setModal(false)} className="btn btn-outline btn-error">
             취소
           </div>
           <button
