@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import MemoComment from "./MemoComment";
 import store from "../../store";
+import MemoReprotModal from "./MemoReprotModal";
 
 const MemoDetail = ({ memo }) => {
   const navigate = useNavigate();
   const [commentData, setCommentData] = useState([]);
+  const [modal, setModal] = useState(false);
   const [userId, setUserId] = useState("");
   const token = localStorage.getItem("access_token");
   const memoSeq = memo.seq;
@@ -76,9 +78,11 @@ const MemoDetail = ({ memo }) => {
 
             {userId !== memo.user_id ? (
               <div className="flex justify-end">
-                <a href="#report" className="link-hover text-xs pt-5 text-error">
+                <button
+                  className="link-hover text-xs pt-5 text-error"
+                  onClick={() => setModal(true)}>
                   신고하기
-                </a>
+                </button>
               </div>
             ) : (
               <></>
@@ -86,7 +90,6 @@ const MemoDetail = ({ memo }) => {
           </div>
         </div>
       </div>
-
       {userId === memo.user_id ? (
         <div className="flex justify-center mt-5 mx-5">
           <div className="flex justify-end xl:w-6/12 lg:w-6/12 md:w-8/12 w-full">
@@ -103,8 +106,10 @@ const MemoDetail = ({ memo }) => {
       ) : (
         <></>
       )}
-
       {commentData.length > 0 ? <MemoComment data={commentData} /> : <></>}
+      {modal && (
+        <MemoReprotModal reportId={"report"} content={"일기"} memo={memo} setModal={setModal} />
+      )}
     </>
   );
 };
