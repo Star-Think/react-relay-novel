@@ -122,7 +122,15 @@ const MemoComment = ({ data }) => {
                   </React.Fragment>
                 ) : (
                   <React.Fragment key={comment.seq}>
-                    <div className="w-4/6">{comment.content}</div>
+                    <div className="w-4/6">
+                      {comment.content}
+                      {console.log(comment)}
+                      {comment.type === "1" && (
+                        <p className="w-5/6 label-text-alt text-error">
+                          게시글 작성자와 댓글 작성자, 학급 선생님만 읽을 수 있는 비밀 댓글입니다.
+                        </p>
+                      )}
+                    </div>
                     <div className="text-right">
                       <div>
                         <div
