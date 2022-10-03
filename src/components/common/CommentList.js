@@ -40,6 +40,7 @@ const CommentList = ({ commentList, memoDataList, path }) => {
                 style={{ cursor: "pointer" }}>
                 <div className="flex justify-between">
                   <h2 className="card-title">{commentTitleText()}</h2>
+                  {!viewId && elem.type === "1" && <div className="badge badge-error">비밀</div>}
                 </div>
                 <p>{elem.content}</p>
               </div>
