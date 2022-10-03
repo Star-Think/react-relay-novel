@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 const MyPage = () => {
   const marginTop = {
-    marginTop: "180px",
+    marginTop: "170px",
   };
   const width100 = {
     width: "100%",
@@ -44,7 +44,6 @@ const MyPage = () => {
     console.log(data);
   };
 
-
   // email
   const [mailCk, setMailCk] = useState(true);
   const handleChange2 = (e) => {
@@ -54,23 +53,24 @@ const MyPage = () => {
       [name]: value,
     });
 
-    const text = document.querySelector('#email');
-    const mailInform = document.querySelector('#mailCkMessage');
+    const text = document.querySelector("#email");
+    const mailInform = document.querySelector("#mailCkMessage");
     //eslint-disable-next-line
-    var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-    mailInform.style.color = 'crimson';
+    var regEmail =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    mailInform.style.color = "crimson";
     if (regEmail.test(text.value) === true) {
-        mailInform.innerHTML = '';
-        setMailCk(true);
-    }else {
-        mailInform.innerHTML = '이메일 형식이 아닙니다.';
-        setMailCk(false);
+      mailInform.innerHTML = "";
+      setMailCk(true);
+    } else {
+      mailInform.innerHTML = "이메일 형식이 아닙니다.";
+      setMailCk(false);
     }
   };
 
   async function editMe() {
-    if(window.confirm("수정하시겠습니까?")) {
-      if(mailCk) {
+    if (window.confirm("수정하시겠습니까?")) {
+      if (mailCk) {
         try {
           const url = "/star/api/myPageUpdate";
           const params = {
@@ -81,18 +81,17 @@ const MyPage = () => {
           const response = await axios.post(url, params, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          alert("변경되었습니다.")
+          alert("변경되었습니다.");
         } catch (error) {
           console.error(error);
         }
       } else {
-        alert('이메일 형식을 확인해주세요')
-      } 
+        alert("이메일 형식을 확인해주세요");
+      }
     } else {
-      alert("수정이 취소되었습니다.")
+      alert("수정이 취소되었습니다.");
       window.location.reload();
     }
-
   }
   return (
     <div>
@@ -125,7 +124,7 @@ const MyPage = () => {
             placeholder="이메일"
             id="email"
           />
-           <span id='mailCkMessage' className='small_span'></span>
+          <span id="mailCkMessage" className="small_span"></span>
           <div className="flex justify-end">
             <button
               className="btn btn-primary btn-block"
