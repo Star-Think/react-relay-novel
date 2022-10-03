@@ -44,7 +44,7 @@ const CommentList = ({ commentList, memoDataList, path }) => {
                 </div>
                 <p>{elem.content}</p>
               </div>
-              {!receivedComment && viewId === userId && (
+              {!receivedComment && !viewId && (
                 <div className="flex justify-end mt-10">
                   <div
                     onClick={() => navigate("/my/edit-comment", { state: { data: elem } })}
