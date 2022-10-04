@@ -30,6 +30,14 @@ const Signup = () => {
         const userPwCh = document.querySelector('#id_password1');
         const passInform = document.querySelector('#passCkMessage');
         passInform.style.color = 'crimson';
+        userPw.addEventListener('keyup', function(){
+            if(userPw.value !== userPwCh.value) {
+                setPwdCkText2(false);
+            } else {
+                setPwdCkText2(true);
+                passInform.innerHTML = ''
+            }
+        })
         userPwCh.addEventListener('keyup', function(){
             if(userPw.value !== userPwCh.value) {
                 setPwdCkText2(false);
