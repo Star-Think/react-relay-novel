@@ -101,7 +101,9 @@ function Login() {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-10 link link-hover text-warning">
+      <div
+        className="flex justify-center mt-10 link link-hover text-warning"
+        onClick={() => navigate("/signup")}>
         <div>회원가입</div>
       </div>
       <div className="flex justify-center mt-10 link text-sm text-gray-500">
