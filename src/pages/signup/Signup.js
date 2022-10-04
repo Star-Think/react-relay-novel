@@ -32,6 +32,7 @@ const Signup = () => {
         passInform.style.color = 'crimson';
         userPwCh.addEventListener('keyup', function(){
             if(userPw.value !== userPwCh.value) {
+                setPwdCkText2(false);
                 passInform.innerHTML = '비밀번호가 일치하지 않습니다.';
             } else {
                 setPwdCkText2(true);
