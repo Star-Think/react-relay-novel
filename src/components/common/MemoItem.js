@@ -4,8 +4,6 @@ const MemoItem = ({ memo, path }) => {
   const navigate = useNavigate();
   const isMyMemo = path === "/my";
 
-  console.log(`path는 ${path}이다`);
-
   return (
     <>
       <div className="lg:w-1/4 md:w-1/2 w-full p-5">

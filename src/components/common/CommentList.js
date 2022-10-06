@@ -9,9 +9,15 @@ const CommentList = ({ commentList, memoDataList, path }) => {
   const viewId = location.state.viewId;
   const userId = store.getState().user.userInfo.user_id;
   const receivedComment = pathName.includes("received");
+
   const memoData = memoDataList.filter((elem) => {
-    return elem.seq === commentList[0].story_seq;
+    return commentList.map((comment) => {
+      return elem.seq === comment.story_seq;
+    });
   });
+
+  console.log(memoDataList);
+  console.log(commentList);
 
   const commentTitleText = () => {
     if (receivedComment) {
@@ -33,7 +39,7 @@ const CommentList = ({ commentList, memoDataList, path }) => {
             <div className={"card-body h-" + (receivedComment ? "36" : "48") + " bg-white"}>
               <div
                 onClick={() =>
-                  navigate(`/everydiary/page/detail/${elem.story_seq}`, {
+                  navigate(`/everydiary/detail/${elem.story_seq}`, {
                     state: { data: memoData },
                   })
                 }

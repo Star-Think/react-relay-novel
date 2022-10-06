@@ -10,6 +10,7 @@ import store from "../../store";
 
 const MyMain = () => {
   const [data, setData] = useState([]);
+  const [allData, setAllData] = useState([]);
   const [totalDataCount, setTotalDataCount] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,6 +41,19 @@ const MyMain = () => {
     } catch (error) {
       console.error(error);
     }
+
+    try {
+      const response = await axios.post(
+        "/star/api/diaryGet",
+        { page: page, rows: 500 },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      const memoData = response.data.data;
+      setTotalDataCount(memoData.count);
+      setAllData(memoData.list);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -53,7 +67,7 @@ const MyMain = () => {
   return (
     <>
       <Header />
-      <MyTitle memoDataList={data} viewId={viewId} nickName={nickName} />
+      <MyTitle memoDataList={allData} viewId={viewId} nickName={nickName} />
       <MemoList memoDataList={data} path={"/my"} />
       {totalDataCount > 0 && (
         <Pagination total={totalDataCount} rows={row} page={page} setPage={setPage} />

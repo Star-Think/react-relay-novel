@@ -61,7 +61,11 @@ const EveryMain = () => {
                 <>
                   <MemoTitle title={"모두의 일기"} />
                   <MemoList memoDataList={memoDataList} path={`/everydiary/${page}`} />
-                  <MemoPage memoDataCount={memoDataList.length} totalPage={totalPage} />
+                  <MemoPage
+                    memoDataCount={memoDataList.length}
+                    totalPage={totalPage}
+                    path={"everydiary"}
+                  />
                 </>
               )}
             </>

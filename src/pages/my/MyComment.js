@@ -13,6 +13,7 @@ const MyComment = () => {
   const commentLength =
     location.state && location.state.commentList ? location.state.commentList.length : 0;
 
+  console.log(location.state);
   return (
     <>
       <Header />

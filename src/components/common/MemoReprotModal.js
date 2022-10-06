@@ -17,6 +17,7 @@ const MemoReprotModal = ({ reportId, content, memo, setModal }) => {
       await axios.post(
         "/star/api/reportAdd",
         {
+          report_id: memo.user_id,
           report_seq: memo.seq,
           content: reportContent,
           user: memo.nickname,
