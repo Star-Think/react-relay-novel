@@ -36,7 +36,7 @@ const FindPwd = () => {
       setLoading(true);
       await axios({
         method: "post",
-        url: "/star/api/userPwdFindGet",
+        url: process.env.REACT_APP_DB_HOST + "/api/userPwdFindGet",
         data: {
           email: emailText,
           user_id: idText,

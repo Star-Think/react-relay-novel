@@ -39,7 +39,7 @@ const CommentEdit = () => {
   const setData = async () => {
     try {
       const response = await axios.post(
-        "/star/api/commentUpdate",
+        process.env.REACT_APP_DB_HOST + "/api/commentUpdate",
         {
           seq: locationData.seq,
           content: state.content,

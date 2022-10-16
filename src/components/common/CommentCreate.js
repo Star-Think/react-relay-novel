@@ -31,7 +31,7 @@ const CommentCreate = ({ memo }) => {
     const token = localStorage.getItem("access_token");
 
     const res = await axios.post(
-      "/star/api/commentAdd",
+      process.env.REACT_APP_DB_HOST + "/api/commentAdd",
       {
         story_seq: memo.seq,
         content: commentData.comment,

@@ -9,7 +9,7 @@ const AdminDiaryPopup = ({ modalId, title, content, reportSeq, reportData, getDa
     if (window.confirm("신고처리 하시겠습니까?")) {
       return await axios({
         method: "post",
-        url: "/star/api/reportCompletion",
+        url: process.env.REACT_APP_DB_HOST + "/api/reportCompletion",
         data: {
           seq: report_seq,
           keyword: state,

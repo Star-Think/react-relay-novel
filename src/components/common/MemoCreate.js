@@ -41,7 +41,9 @@ const MemoCreate = () => {
 
   const setData = async () => {
     try {
-      const url = isEdit ? "/star/api/diaryUpdate" : "/star/api/diaryAdd";
+      const url = isEdit
+        ? process.env.REACT_APP_DB_HOST + "/api/diaryUpdate"
+        : process.env.REACT_APP_DB_HOST + "/api/diaryAdd";
       const params = isEdit
         ? {
             seq: locationData.seq,

@@ -15,7 +15,7 @@ const MemoDetail = ({ memo }) => {
   const getData = async () => {
     try {
       const response = await axios.post(
-        "/star/api/diaryDetail",
+        process.env.REACT_APP_DB_HOST + "/api/diaryDetail",
         { seq: memoSeq, user_id: memo.user_id },
         { headers: { Authorization: `Bearer ${token}` } }
       );

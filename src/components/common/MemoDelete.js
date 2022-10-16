@@ -17,7 +17,9 @@ const MemoDelete = () => {
 
   const deleteData = async () => {
     try {
-      const url = isComment ? "/star/api/commentDelete" : "/star/api/diaryDelete";
+      const url = isComment
+        ? process.env.REACT_APP_DB_HOST + "/api/commentDelete"
+        : process.env.REACT_APP_DB_HOST + "/api/diaryDelete";
       const response = await axios.post(
         url,
         { seq: seq },

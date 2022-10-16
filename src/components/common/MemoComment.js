@@ -23,7 +23,7 @@ const MemoComment = ({ data }) => {
 
     try {
       await axios.post(
-        "/star/api/commentDelete",
+        process.env.REACT_APP_DB_HOST + "/api/commentDelete",
         { seq: seq },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -52,7 +52,7 @@ const MemoComment = ({ data }) => {
 
     try {
       await axios.post(
-        "/star/api/commentUpdate",
+        process.env.REACT_APP_DB_HOST + "/api/commentUpdate",
         {
           seq: seq,
           content: commentData.comment,

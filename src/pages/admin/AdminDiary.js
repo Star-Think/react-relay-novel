@@ -37,7 +37,7 @@ const AdminDiary = () => {
   const getData = async () => {
     return await axios({
       method: "post",
-      url: "/star/api/reportDiaryGet",
+      url: process.env.REACT_APP_DB_HOST + "/api/reportDiaryGet",
       data: {
         page: page,
         rows: rows,

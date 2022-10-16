@@ -31,7 +31,7 @@ function Login() {
     setLoading(true);
     await axios({
       method: "post",
-      url: "/star/api/login",
+      url: process.env.REACT_APP_DB_HOST + "/api/login",
       data: {
         user_id: idText,
         password: pwdText,
@@ -39,6 +39,7 @@ function Login() {
     })
       .then((res) => {
         localStorage.setItem("access_token", res.data.data);
+        console.log(res.data);
         return userInfo(res.data.data);
       })
       .then((res) => {
@@ -68,7 +69,7 @@ function Login() {
   const userInfo = async (token) => {
     return await axios({
       method: "get",
-      url: "/star/api/users",
+      url: process.env.REACT_APP_DB_HOST + "/api/users",
       headers: {
         Authorization: `Bearer ${token}`,
       },

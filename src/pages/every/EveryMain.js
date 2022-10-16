@@ -22,7 +22,7 @@ const EveryMain = () => {
 
     try {
       const response = await axios.post(
-        "/star/api/diaryGet",
+        process.env.REACT_APP_DB_HOST + "/api/diaryGet",
         { page: page, rows: 10 },
         { headers: { Authorization: `Bearer ${token}` } }
       );

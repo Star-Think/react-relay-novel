@@ -31,7 +31,7 @@ const MyMain = () => {
   const getData = async () => {
     try {
       const response = await axios.post(
-        "/star/api/diaryGet",
+        process.env.REACT_APP_DB_HOST + "/api/diaryGet",
         { page: page, rows: row, view_id: viewId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -44,7 +44,7 @@ const MyMain = () => {
 
     try {
       const response = await axios.post(
-        "/star/api/diaryGet",
+        process.env.REACT_APP_DB_HOST + "/api/diaryGet",
         { page: page, rows: 500 },
         { headers: { Authorization: `Bearer ${token}` } }
       );

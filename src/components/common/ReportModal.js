@@ -32,7 +32,7 @@ const ReportModal = ({ modalType, blockId }) => {
           pContent:
             "부적절한 회원인가요? 의견을 주시면 꼼꼼하게 검토하겠습니다 처리 결과는 별도 안내드리지 않습니다.",
           btnText: "신고",
-          url: "/star/api/reportAdd",
+          url: process.env.REACT_APP_DB_HOST + "/api/reportAdd",
         });
         break;
       case "block":
@@ -40,7 +40,7 @@ const ReportModal = ({ modalType, blockId }) => {
           title: "차단하기",
           pContent: `'${blockId}'을(를) 차단하시겠습니까? 차단한 회원의 게시글과 댓글은 보이지 않습니다.`,
           btnText: "차단",
-          url: "/star/api/blockUserAdd",
+          url: process.env.REACT_APP_DB_HOST + "/api/blockUserAdd",
           param: { block_id: blockId },
         });
         break;

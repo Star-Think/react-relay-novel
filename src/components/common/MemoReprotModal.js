@@ -15,7 +15,7 @@ const MemoReprotModal = ({ reportId, content, memo, setModal }) => {
     const token = localStorage.getItem("access_token");
     try {
       await axios.post(
-        "/star/api/reportAdd",
+        process.env.REACT_APP_DB_HOST + "/api/reportAdd",
         {
           report_id: memo.user_id,
           report_seq: memo.seq,

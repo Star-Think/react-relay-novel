@@ -37,7 +37,7 @@ const AdminUser = () => {
   const getData = async () => {
     return await axios({
       method: "post",
-      url: "/star/api/reportUserGet",
+      url: process.env.REACT_APP_DB_HOST + "/api/reportUserGet",
       data: {
         page: page,
         rows: rows,

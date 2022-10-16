@@ -27,7 +27,7 @@ const FindId = () => {
       setLoading(true);
       await axios({
         method: "post",
-        url: "/star/api/userIdFindGet",
+        url: process.env.REACT_APP_DB_HOST + "/api/userIdFindGet",
         data: {
           email: emailText,
         },

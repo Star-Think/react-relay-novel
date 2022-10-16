@@ -19,7 +19,7 @@ const MyPage = () => {
     try {
       const response = await axios({
         method: "post",
-        url: "/star/api/myPageGet",
+        url: process.env.REACT_APP_DB_HOST + "/api/myPageGet",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -72,7 +72,7 @@ const MyPage = () => {
     if (window.confirm("수정하시겠습니까?")) {
       if (mailCk) {
         try {
-          const url = "/star/api/myPageUpdate";
+          const url = process.env.REACT_APP_DB_HOST + "/api/myPageUpdate";
           const params = {
             nickname: data.nickname,
             self: data.self,

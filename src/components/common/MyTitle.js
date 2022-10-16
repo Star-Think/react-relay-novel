@@ -66,7 +66,7 @@ const MyTitle = ({ memoDataList }) => {
   const getUserInfo = async (type) => {
     try {
       const response = await axios.post(
-        "/star/api/userNameGet",
+        process.env.REACT_APP_DB_HOST + "/api/userNameGet",
         { user_id: locationViewId },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -82,7 +82,7 @@ const MyTitle = ({ memoDataList }) => {
   const getBlockUserCheck = async () => {
     try {
       const response = await axios.post(
-        "/star/api/blockUserCheck",
+        process.env.REACT_APP_DB_HOST + "/api/blockUserCheck",
         { block_id: locationViewId },
         {
           headers: { Authorization: `Bearer ${token}` },

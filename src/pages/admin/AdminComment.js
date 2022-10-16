@@ -35,7 +35,7 @@ const AdminComment = () => {
   const getData = async () => {
     return await axios({
       method: "post",
-      url: "/star/api/reportCommentGet",
+      url: process.env.REACT_APP_DB_HOST + "/api/reportCommentGet",
       data: {
         page: page,
         rows: rows,
